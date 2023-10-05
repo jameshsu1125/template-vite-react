@@ -6,4 +6,5 @@ const Landing = memo(({ children }: IProps) => {
 	useEffect(() => {}, []);
 	return <div className='Landing'>{children}</div>;
 });
+
 export default Landing;

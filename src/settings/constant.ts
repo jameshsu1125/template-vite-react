@@ -2,29 +2,12 @@ import { createContext } from 'react';
 import {
 	Action,
 	ActionType,
-	AlertState,
-	AlertType,
 	LoadingProcessState,
 	LoadingProcessType,
-	ModalState,
 	State,
 	TContext,
 } from './type';
 import { PAGE } from './config';
-
-export const MODAL_STATE: ModalState = {
-	enabled: false,
-	title: '',
-	body: '',
-	button: '',
-};
-
-export const ALERT_STATE: AlertState = {
-	enabled: false,
-	type: AlertType.SUCCESS,
-	body: '',
-	duration: 10000000,
-};
 
 export const LOADING_PROCESS_STATE: LoadingProcessState = {
 	enabled: false,
@@ -34,8 +17,6 @@ export const LOADING_PROCESS_STATE: LoadingProcessState = {
 
 export const initialState: State = {
 	[ActionType.page]: PAGE.landing,
-	[ActionType.modal]: MODAL_STATE,
-	[ActionType.alert]: ALERT_STATE,
 	[ActionType.loadingProcess]: LOADING_PROCESS_STATE,
 };
 

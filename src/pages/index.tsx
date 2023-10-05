@@ -18,7 +18,7 @@ const Pages = memo(() => {
 		if (target) {
 			return (
 				<Suspense fallback=''>
-					<Element>static pages</Element>
+					<Element>Static Pages</Element>
 				</Suspense>
 			);
 		}
@@ -30,7 +30,7 @@ const Pages = memo(() => {
 
 const RoutePages = memo(() => (
 	<Routes>
-		<Route path='/' element={<Landing>RoutePages</Landing>} />
+		<Route path='/' element={<Landing>Route Pages</Landing>} />
 	</Routes>
 ));
 
@@ -50,8 +50,10 @@ const App = () => {
 	);
 };
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>,
-);
+if (document.getElementById('root')?.children.length === 0) {
+	ReactDOM.createRoot(document.getElementById('root')!).render(
+		<React.StrictMode>
+			<App />
+		</React.StrictMode>,
+	);
+}
