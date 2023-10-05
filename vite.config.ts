@@ -40,6 +40,7 @@ export default defineConfig(({ mode }) => {
 						title: env.VITE_TITLE,
 						description: env.VITE_SUBSCRIPTION,
 						url: env.VITE_URL,
+						facebookID: env.VITE_FACEBOOK_ID,
 					},
 				},
 			}),
