@@ -1,10 +1,19 @@
+import useTodos from '@/hooks/useTodos';
 import { IProps } from '@/settings/type';
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import './index.less';
 
 const Landing = memo(({ children }: IProps) => {
-	useEffect(() => {}, []);
-	return <div className='Landing'>{children}</div>;
+	const [todos, getTodos] = useTodos();
+	return (
+		<div className='Landing'>
+			{children}
+			{JSON.stringify(todos)}
+			<button className='p-5 bg-red-500' onClick={getTodos}>
+				Fetch
+			</button>
+		</div>
+	);
 });
 
 export default Landing;

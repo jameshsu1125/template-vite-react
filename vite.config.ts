@@ -50,5 +50,10 @@ export default defineConfig(({ mode }) => {
 				'@': resolve(__dirname, 'src'),
 			},
 		},
+		define: {
+			process: {
+				env,
+			},
+		},
 	};
 });

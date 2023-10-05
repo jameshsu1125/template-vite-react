@@ -17,9 +17,9 @@ export enum LoadingProcessType {
 }
 
 export type LoadingProcessState = {
-	enabled: boolean;
-	type: LoadingProcessType;
-	body: '';
+	enabled?: boolean;
+	type?: LoadingProcessType;
+	body?: '';
 };
 
 export interface State {
