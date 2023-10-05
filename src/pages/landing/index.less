@@ -1,23 +1,2 @@
 .Landing {
-	position: relative;
-	width: image-width(@img) * @scale;
-	height: image-height(@img) * @scale;
-	background-image: url(@img);
-	background-size: 100%;
-
-	@scale: 1;
-	@img: './img/003.jpg';
-
-	&::after {
-		position: absolute;
-		content: '';
-		width: image-width(@img) * @scale;
-		height: image-height(@img) * @scale;
-		background-image: url(@img);
-		background-size: 100%;
-		left: 100%;
-
-		@scale: 1;
-		@img: './003.jpg';
-	}
 }
