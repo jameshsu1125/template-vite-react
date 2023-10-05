@@ -1,27 +1,53 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { createHtmlPlugin } from 'vite-plugin-html';
 import { resolve } from 'path';
+import { loadEnv } from 'vite';
 
 // https://vitejs.dev/config/
-export default defineConfig({
-	root: resolve(__dirname, 'src/pages'),
-	build: {
-		outDir: resolve(__dirname, 'dist'),
-		rollupOptions: {
-			input: {
-				index: resolve(__dirname, 'src/pages/index.html'),
-			},
-		},
-	},
-	css: {
-		preprocessorOptions: {
-			less: {
-				math: 'always',
-				globalVars: {
-					mainColor: 'red',
+export default defineConfig(({ mode }) => {
+	const env = loadEnv(mode, process.cwd());
+
+	return {
+		base: './',
+		root: resolve(__dirname, 'src/pages'),
+		publicDir: resolve(__dirname, 'public'),
+		build: {
+			outDir: resolve(__dirname, 'dist'),
+			emptyOutDir: true,
+			rollupOptions: {
+				input: {
+					index: resolve(__dirname, 'src/pages/index.html'),
 				},
 			},
 		},
-	},
-	plugins: [react()],
+		css: {
+			preprocessorOptions: {
+				less: {
+					math: 'always',
+					globalVars: {
+						mainColor: 'red',
+					},
+				},
+			},
+		},
+		plugins: [
+			react(),
+			createHtmlPlugin({
+				minify: true,
+				inject: {
+					data: {
+						title: env.VITE_TITLE,
+						description: env.VITE_SUBSCRIPTION,
+						url: env.VITE_URL,
+					},
+				},
+			}),
+		],
+		resolve: {
+			alias: {
+				'@': resolve(__dirname, 'src'),
+			},
+		},
+	};
 });
