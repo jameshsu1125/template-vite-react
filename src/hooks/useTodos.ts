@@ -3,7 +3,13 @@ import { useContext, useState } from 'react';
 import { RestPath } from '../settings/config';
 import { Context } from '../settings/constant';
 import { ActionType } from '@/settings/type';
-import { TResult } from '@/mocks/handlers';
+
+export type TResult = {
+	userID: string;
+	id: number;
+	title: string;
+	completed: boolean;
+};
 
 const useTodos = () => {
 	const [, setContext] = useContext(Context);
