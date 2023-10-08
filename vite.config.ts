@@ -6,54 +6,54 @@ import { loadEnv } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-	const env = loadEnv(mode, process.cwd());
+  const env = loadEnv(mode, process.cwd());
 
-	return {
-		base: './',
-		root: resolve(__dirname, 'src/pages'),
-		publicDir: resolve(__dirname, 'public'),
-		build: {
-			outDir: resolve(__dirname, 'dist'),
-			emptyOutDir: true,
-			rollupOptions: {
-				input: {
-					index: resolve(__dirname, 'src/pages/index.html'),
-				},
-			},
-		},
-		css: {
-			preprocessorOptions: {
-				less: {
-					math: 'always',
-					globalVars: {
-						mainColor: 'red',
-					},
-				},
-			},
-		},
-		plugins: [
-			react(),
-			createHtmlPlugin({
-				minify: true,
-				inject: {
-					data: {
-						title: env.VITE_TITLE,
-						description: env.VITE_SUBSCRIPTION,
-						url: env.VITE_URL,
-						facebookID: env.VITE_FACEBOOK_ID,
-					},
-				},
-			}),
-		],
-		resolve: {
-			alias: {
-				'@': resolve(__dirname, 'src'),
-			},
-		},
-		define: {
-			process: {
-				env,
-			},
-		},
-	};
+  return {
+    base: './',
+    root: resolve(__dirname, 'src/pages'),
+    publicDir: resolve(__dirname, 'public'),
+    build: {
+      outDir: resolve(__dirname, 'dist'),
+      emptyOutDir: true,
+      rollupOptions: {
+        input: {
+          index: resolve(__dirname, 'src/pages/index.html'),
+        },
+      },
+    },
+    css: {
+      preprocessorOptions: {
+        less: {
+          math: 'always',
+          globalVars: {
+            mainColor: 'red',
+          },
+        },
+      },
+    },
+    plugins: [
+      react(),
+      createHtmlPlugin({
+        minify: true,
+        inject: {
+          data: {
+            title: env.VITE_TITLE,
+            description: env.VITE_SUBSCRIPTION,
+            url: env.VITE_URL,
+            facebookID: env.VITE_FACEBOOK_ID,
+          },
+        },
+      }),
+    ],
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'src'),
+      },
+    },
+    define: {
+      process: {
+        env,
+      },
+    },
+  };
 });

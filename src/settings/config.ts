@@ -1,7 +1,7 @@
 export const PAGE = {
-	landing: 'landing',
+  landing: 'landing',
 };
 
 export const RestPath = {
-	test: 'todos/1',
+  test: 'todos/1',
 };
