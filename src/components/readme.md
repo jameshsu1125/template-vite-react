@@ -1,10 +1,3 @@
-[![NPM](https://img.shields.io/badge/NPM-ba443f?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/)
-[![React](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/en/)
-[![React](https://img.shields.io/badge/-ReactJs-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://zh-hant.reactjs.org/)
-[![React](https://img.shields.io/badge/Typescript-4277c0?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/Less-1d365d?style=for-the-badge&logo=less&logoColor=white)](https://lesscss.org/)
-[![NPM](https://img.shields.io/badge/DEV-Jameshsu1125-9cf?style=for-the-badge)](https://www.npmjs.com/~jameshsu1125)
-
 # Components
 
 ## Table of components
@@ -26,15 +19,18 @@
 #### Usage
 
 ```JSX
-import { Context } from '@/settings/config';
-import { ACTION } from '@/settings/constant';
+import { ActionType } from '@/settings/type';
+import { Context} from '@/settings/constant';
 
 const Pages = () => {
   const [, setContext] = useContext(Context);
   return (
     <button
       onClick={() => {
-        setContext({ type: ACTION.LoadingProcess, state: { enabled: true } });
+        setContext({ 
+          type: ActionType.LoadingProcess, 
+          state: { enabled: true } 
+        });
       }}
     >
       Submit
