@@ -93,15 +93,14 @@ import { useState } from 'react';
 import { RestPath } from '@/settings/config';
 
 const useTodos = () => {
-	const [state, setState] = useState();
+  const [state, setState] = useState();
 	const fetch = async () => {
-		const respond = await Fetcher.get(RestPath.test);
-		setState(respond);
-	};
-	return [state, fetch];
+    const respond = await Fetcher.get(RestPath.test);
+    setState(respond);
+  };
+  return [state, fetch];
 };
 export default useTodos;
-
 ```
 
 

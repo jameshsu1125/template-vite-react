@@ -2,6 +2,7 @@
 	"jsxBracketSameLine": false,
 	"singleQuote": true,
 	"useTabs": false,
+	"tabWidth": 2,
 	"jsxSingleQuote": true,
 	"printWidth": 100,
 	"trailingComma": "all",

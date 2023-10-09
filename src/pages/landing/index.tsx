@@ -1,17 +1,22 @@
 import useTodos from '@/hooks/useTodos';
 import { IProps } from '@/settings/type';
-import { memo } from 'react';
+import { memo, useState } from 'react';
+import { LandingContext, LandingState, TLandingState } from './config';
 import './index.less';
 
 const Landing = memo(({ children }: IProps) => {
+  const [state, setState] = useState<TLandingState>(LandingState);
   const [todos, getTodos] = useTodos();
+
   return (
     <div className='Landing'>
-      {children}
-      {JSON.stringify(todos)}
-      <button className='p-5 bg-red-500' onClick={getTodos}>
-        Fetch
-      </button>
+      <LandingContext.Provider value={[state, setState]}>
+        {children}
+        {JSON.stringify(todos)}
+        <button className='p-5 bg-red-500' onClick={getTodos}>
+          Fetch
+        </button>
+      </LandingContext.Provider>
     </div>
   );
 });
