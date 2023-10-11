@@ -1,12 +1,14 @@
 import { Context } from '@/settings/constant';
-import { ActionType, IProps } from '@/settings/type';
+import { ActionType, IReactProps } from '@/settings/type';
 import { memo, useContext } from 'react';
 import ReactLoading from 'react-loading';
 
 const Background = () => (
   <div className='absolute top-0 h-full w-full bg-backgroundColor opacity-90' />
 );
-const Text = ({ children }: IProps) => <span className='relative text-textColor'>{children}</span>;
+const Text = ({ children }: IReactProps) => (
+  <span className='relative text-textColor'>{children}</span>
+);
 const LoadingProcess = memo(() => {
   const [context] = useContext(Context);
   const data = context[ActionType.loadingProcess];

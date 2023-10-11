@@ -1,27 +1,27 @@
 import { createContext } from 'react';
 import {
-  Action,
+  IAction,
   ActionType,
-  LoadingProcessState,
+  TLoadingProcessState,
   LoadingProcessType,
-  State,
+  IState,
   TContext,
 } from './type';
 import { PAGE } from './config';
 
-export const LOADING_PROCESS_STATE: LoadingProcessState = {
+export const LOADING_PROCESS_STATE: TLoadingProcessState = {
   enabled: false,
   type: LoadingProcessType.spokes,
   body: '',
 };
 
-export const initialState: State = {
+export const initialState: IState = {
   [ActionType.page]: PAGE.landing,
   [ActionType.loadingProcess]: LOADING_PROCESS_STATE,
 };
 
 export const Context = createContext<TContext>([initialState, () => {}]);
-export const reducer = (state: State, action: Action): State => {
+export const reducer = (state: IState, action: IAction): IState => {
   if (action.state instanceof Object) {
     let stateStorage: { [key: string]: any } = {};
     Object.entries(action.state)

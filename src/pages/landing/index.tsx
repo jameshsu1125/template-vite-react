@@ -1,10 +1,10 @@
 import useTodos from '@/hooks/useTodos';
-import { IProps } from '@/settings/type';
+import { IReactProps } from '@/settings/type';
 import { memo, useState } from 'react';
 import { LandingContext, LandingState, TLandingState } from './config';
 import './index.less';
 
-const Landing = memo(({ children }: IProps) => {
+const Landing = memo(({ children }: IReactProps) => {
   const [state, setState] = useState<TLandingState>(LandingState);
   const [todos, getTodos] = useTodos();
 

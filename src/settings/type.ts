@@ -16,28 +16,6 @@ export enum LoadingProcessType {
   spokes = 'spokes',
 }
 
-export type LoadingProcessState = {
-  enabled?: boolean;
-  type?: LoadingProcessType;
-  body?: '';
-};
-
-export interface State {
-  page: string;
-  loadingProcess?: LoadingProcessState;
-}
-
-export interface Action {
-  state: State | LoadingProcessState;
-  type: ActionType;
-}
-
-export type TContext = [State, Dispatch<Action>];
-
-export interface IProps {
-  children?: ReactNode;
-}
-
 export enum TransitionType {
   unset = 0,
   fadeIn = 1,
@@ -46,4 +24,26 @@ export enum TransitionType {
   didFadeOut = 4,
   loop = 5,
   stop = 6,
+}
+
+export type TLoadingProcessState = {
+  enabled?: boolean;
+  type?: LoadingProcessType;
+  body?: '';
+};
+
+export interface IState {
+  page: string;
+  loadingProcess?: TLoadingProcessState;
+}
+
+export interface IAction {
+  state: IState | TLoadingProcessState;
+  type: ActionType;
+}
+
+export type TContext = [IState, Dispatch<IAction>];
+
+export interface IReactProps {
+  children?: ReactNode;
 }
