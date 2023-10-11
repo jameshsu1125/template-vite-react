@@ -2,6 +2,6 @@ export const PAGE = {
   landing: 'landing',
 };
 
-export const RestPath = {
+export const REST_PATH = {
   test: 'todos/1',
 };

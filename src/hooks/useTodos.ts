@@ -1,6 +1,6 @@
 import Fetcher from 'lesca-fetcher';
 import { useContext, useState } from 'react';
-import { RestPath } from '../settings/config';
+import { REST_PATH } from '../settings/config';
 import { Context } from '../settings/constant';
 import { ActionType } from '@/settings/type';
 
@@ -16,7 +16,7 @@ const useTodos = () => {
   const [state, setState] = useState<TResult>({ id: 0, userID: '', title: '', completed: false });
   const fetch = async () => {
     setContext({ type: ActionType.loadingProcess, state: { enabled: true } });
-    const respond = (await Fetcher.get(RestPath.test)) as TResult;
+    const respond = (await Fetcher.get(REST_PATH.test)) as TResult;
     setState(respond);
     setContext({ type: ActionType.loadingProcess, state: { enabled: false } });
   };

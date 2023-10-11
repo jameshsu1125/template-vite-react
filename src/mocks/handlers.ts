@@ -1,10 +1,10 @@
-import { RestPath } from '@/settings/config';
+import { REST_PATH } from '@/settings/config';
 import { faker } from '@faker-js/faker';
 import { mergePath } from 'lesca-fetcher';
 import { rest } from 'msw';
 
 export const handlers = [
-  rest.get(mergePath(RestPath.test), (_, res, ctx) => {
+  rest.get(mergePath(REST_PATH.test), (_, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
