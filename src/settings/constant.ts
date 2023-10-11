@@ -1,13 +1,13 @@
 import { createContext } from 'react';
-import {
-  IAction,
-  ActionType,
-  TLoadingProcessState,
-  LoadingProcessType,
-  IState,
-  TContext,
-} from './type';
 import { PAGE } from './config';
+import {
+  ActionType,
+  IAction,
+  IState,
+  LoadingProcessType,
+  TContext,
+  TLoadingProcessState,
+} from './type';
 
 export const LOADING_PROCESS_STATE: TLoadingProcessState = {
   enabled: false,
