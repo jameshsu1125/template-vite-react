@@ -15,9 +15,9 @@ Fetcher.install({
   formatType: formatType.JSON,
 });
 
-if (import.meta.env.VITE_MOCKING) {
+if (import.meta.env.VITE_MOCKING === 'true') {
   import('@/mocks/browser').then((e) => {
-    e.worker.start();
+    e.worker.start({ serviceWorker: { url: './mockServiceWorker.js' } });
   });
 }
 
