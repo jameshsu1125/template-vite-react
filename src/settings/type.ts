@@ -1,29 +1,29 @@
 import { Dispatch, ReactNode } from 'react';
 
 export enum ActionType {
-  page = 'page',
-  loadingProcess = 'loadingProcess',
+  Page = 'page',
+  LoadingProcess = 'loadingProcess',
 }
 
 export enum LoadingProcessType {
-  balls = 'balls',
-  bars = 'bars',
-  bubbles = 'bubbles',
-  cubes = 'cubes',
-  cylon = 'cylon',
-  spin = 'spin',
-  spinningBubbles = 'spinningBubbles',
-  spokes = 'spokes',
+  Ball = 'balls',
+  Bars = 'bars',
+  Bubbles = 'bubbles',
+  Cubes = 'cubes',
+  Cylon = 'cylon',
+  Spin = 'spin',
+  SpinningBubbles = 'spinningBubbles',
+  Spokes = 'spokes',
 }
 
 export enum TransitionType {
-  unset = 0,
-  fadeIn = 1,
-  fadeOut = 2,
-  didFadeIn = 3,
-  didFadeOut = 4,
-  loop = 5,
-  stop = 6,
+  Unset = 0,
+  FadeIn = 1,
+  FadeOut = 2,
+  DidFadeIn = 3,
+  DidFadeOut = 4,
+  Loop = 5,
+  Stop = 6,
 }
 
 export type TLoadingProcessState = {

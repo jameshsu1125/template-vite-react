@@ -14,10 +14,10 @@ interface ButtonProps extends IReactProps {
 const Button = ({ children, transition, onClick }: ButtonProps) => {
   const [style, setStyle] = useTween({ opacity: 0 });
   useEffect(() => {
-    if (transition === TransitionType.fadeIn) {
+    if (transition === TransitionType.FadeIn) {
       setStyle({ opacity: 1 });
     }
-  }, [transition]);
+  }, [setStyle, transition]);
   return (
     <button style={style} className='p-5 bg-red-500' onClick={onClick}>
       {children}
@@ -28,10 +28,10 @@ const Button = ({ children, transition, onClick }: ButtonProps) => {
 const Landing = memo(({ children }: IReactProps) => {
   const [state, setState] = useState<TLandingState>(LandingState);
   const [todos, getTodos] = useTodos();
-  const [transition, setTransition] = useState(TransitionType.unset);
+  const [transition, setTransition] = useState(TransitionType.Unset);
 
   return (
-    <OnloadProvider onload={() => setTransition(TransitionType.fadeIn)}>
+    <OnloadProvider onload={() => setTransition(TransitionType.FadeIn)}>
       <div className='Landing'>
         <LandingContext.Provider value={[state, setState]}>
           {children}

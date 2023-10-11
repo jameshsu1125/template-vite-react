@@ -9,19 +9,19 @@ import {
   TLoadingProcessState,
 } from './type';
 
-export const LOADING_PROCESS_STATE: TLoadingProcessState = {
+export const LoadingProcessState: TLoadingProcessState = {
   enabled: false,
-  type: LoadingProcessType.spokes,
+  type: LoadingProcessType.Spokes,
   body: '',
 };
 
-export const initialState: IState = {
-  [ActionType.page]: PAGE.landing,
-  [ActionType.loadingProcess]: LOADING_PROCESS_STATE,
+export const InitialState: IState = {
+  [ActionType.Page]: PAGE.landing,
+  [ActionType.LoadingProcess]: LoadingProcessState,
 };
 
-export const Context = createContext<TContext>([initialState, () => {}]);
-export const reducer = (state: IState, action: IAction): IState => {
+export const Context = createContext<TContext>([InitialState, () => {}]);
+export const Reducer = (state: IState, action: IAction): IState => {
   if (action.state instanceof Object) {
     let stateStorage: { [key: string]: any } = {};
     Object.entries(action.state)

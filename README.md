@@ -24,6 +24,7 @@
 - [Status](#status)
 - [What's included](#whats-included)
 - [Bugs and feature requests](#bugs-and-feature-requests)
+- [naming conventions rules](#naming-conventions-rules)
 - [Contributing](#contributing)
 - [Creators](#creators)
 - [Thanks](#thanks)
@@ -70,6 +71,21 @@ $ npm run build
 - [Node](https://nodejs.org/en/) version must be above v18
 - I will not maintain when this project is closed
 
+## naming conventions rules
+
+1. react components - `PascalCase`. 
+    > _RegularButton_、_NavigationBar_
+2. type - `I` = interface, `T` = type. 
+    > _IProps_、_TResult_
+3. global variable or state - `PascalCase`.
+    > _Context_、_LandingState_
+4. enum options - `PascalCase` + `Type`. 
+    >  _ActionType_、_AlertType_、_ModalType_
+5. Immutable variable or environment variable - `Screaming Snake Case`. 
+    > _PAGE_、<em>VITE_TITLE</em>、
+
+[naming-conventions](https://medium.com/@code.ceeker/naming-conventions-camel-case-pascal-case-kebab-case-and-more-dc4e515b9652)
+
 ## Contributing
 
 Please read through our [contributing guidelines](https://github.com/github/docs/blob/main/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
@@ -89,6 +105,8 @@ Thank customers and some manufacturers for their support.
 ## Copyright and license
 
 Code and documentation copyright 2011-2022 the authors. Code released under the [MIT License](https://reponame/blob/master/LICENSE).
+
+
 
 
 <!-- open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security -->

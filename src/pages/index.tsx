@@ -1,13 +1,13 @@
 import LoadingProcess from '@/components/loadingProcess';
 import { PAGE } from '@/settings/config';
-import { Context, initialState, reducer } from '@/settings/constant';
+import { Context, InitialState, Reducer } from '@/settings/constant';
 import '@/settings/global.less';
 import { ActionType, TContext } from '@/settings/type';
+import Fetcher, { contentType, formatType } from 'lesca-fetcher';
 import React, { Suspense, lazy, memo, useContext, useMemo, useReducer } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Landing from './landing';
-import Fetcher, { contentType, formatType } from 'lesca-fetcher';
 
 Fetcher.install({
   hostUrl: import.meta.env.VITE_API_PATH || './api',
@@ -48,7 +48,7 @@ const RoutePages = memo(() => (
 ));
 
 const App = () => {
-  const [state, setState] = useReducer(reducer, initialState);
+  const [state, setState] = useReducer(Reducer, InitialState);
   const value: TContext = useMemo(() => [state, setState], [state]);
   return (
     <div className='App'>
