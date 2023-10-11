@@ -9,17 +9,17 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Landing from './landing';
 import Fetcher, { contentType, formatType } from 'lesca-fetcher';
 
-if (process.env.VITE_MOCKING === 'true') {
-  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-  const { worker } = require('../mocks/browser');
-  worker.start({ serviceWorker: { url: './mockServiceWorker' } });
-}
-
 Fetcher.install({
-  hostUrl: process.env.VITE_API_PATH || './api',
+  hostUrl: import.meta.env.VITE_API_PATH || './api',
   contentType: contentType.JSON,
   formatType: formatType.JSON,
 });
+
+if (import.meta.env.VITE_MOCKING) {
+  import('@/mocks/browser').then((e) => {
+    e.worker.start();
+  });
+}
 
 const Pages = memo(() => {
   const [context] = useContext(Context);

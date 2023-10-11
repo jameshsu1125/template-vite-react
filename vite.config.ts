@@ -2,12 +2,9 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { resolve } from 'path';
-import { loadEnv } from 'vite';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd());
-
+export default defineConfig(() => {
   return {
     base: './',
     root: resolve(__dirname, 'src/pages'),
@@ -37,10 +34,10 @@ export default defineConfig(({ mode }) => {
         minify: true,
         inject: {
           data: {
-            title: env.VITE_TITLE,
-            description: env.VITE_SUBSCRIPTION,
-            url: env.VITE_URL,
-            facebookID: env.VITE_FACEBOOK_ID,
+            title: 'a',
+            description: 'v',
+            url: 'c',
+            facebookID: 'a',
           },
         },
       }),
@@ -48,11 +45,6 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src'),
-      },
-    },
-    define: {
-      process: {
-        env,
       },
     },
   };
