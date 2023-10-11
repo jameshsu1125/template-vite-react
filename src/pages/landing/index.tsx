@@ -28,7 +28,6 @@ const Button = ({ children, transition, onClick }: ButtonProps) => {
 const Landing = memo(({ children }: IReactProps) => {
   const [state, setState] = useState<TLandingState>(LandingState);
   const [todos, getTodos] = useTodos();
-
   const [transition, setTransition] = useState(TransitionType.unset);
 
   return (
