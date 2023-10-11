@@ -74,15 +74,15 @@ $ npm run build
 ## naming conventions rules
 
 1. react components - `PascalCase`. 
-    > _RegularButton_、_NavigationBar_
+    > ex: _RegularButton_、_NavigationBar_
 2. type - `I` = interface, `T` = type. 
-    > _IProps_、_TResult_
+    > ex: _IProps_、_TResult_
 3. global variable or state - `PascalCase`.
-    > _Context_、_LandingState_
+    > ex: _Context_、_LandingState_
 4. enum options - `PascalCase` + `Type`. 
     >  _ActionType_、_AlertType_、_ModalType_
 5. Immutable variable or environment variable - `Screaming Snake Case`. 
-    > _PAGE_、<em>VITE_TITLE</em>、
+    > ex: _PAGE_、<em>VITE_TITLE</em>
 
 [naming-conventions](https://medium.com/@code.ceeker/naming-conventions-camel-case-pascal-case-kebab-case-and-more-dc4e515b9652)
 
