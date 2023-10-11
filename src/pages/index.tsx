@@ -23,7 +23,7 @@ if (import.meta.env.VITE_MOCKING === 'true') {
 
 const Pages = memo(() => {
   const [context] = useContext(Context);
-  const page = context[ActionType.page];
+  const page = context[ActionType.Page];
 
   const Page = useMemo(() => {
     const [target] = Object.values(PAGE).filter((data) => data === page);
@@ -57,7 +57,7 @@ const App = () => {
           <RoutePages />
         </BrowserRouter>
         <Pages />
-        {state[ActionType.loadingProcess]?.enabled && <LoadingProcess />}
+        {state[ActionType.LoadingProcess]?.enabled && <LoadingProcess />}
       </Context.Provider>
     </div>
   );
