@@ -1,17 +1,17 @@
 {
-	"jsxBracketSameLine": false,
-	"singleQuote": true,
-	"useTabs": false,
-	"tabWidth": 2,
-	"jsxSingleQuote": true,
-	"printWidth": 100,
-	"trailingComma": "all",
-	"overrides": [
-		{
-			"files": "**/*.md",
-			"options": {
-				"useTabs": false
-			}
-		}
-	]
+  "jsxBracketSameLine": false,
+  "singleQuote": true,
+  "useTabs": false,
+  "tabWidth": 2,
+  "jsxSingleQuote": true,
+  "printWidth": 100,
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": "**/*.md",
+      "options": {
+        "useTabs": false
+      }
+    }
+  ]
 }
