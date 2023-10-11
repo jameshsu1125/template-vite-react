@@ -11,7 +11,7 @@ const Text = ({ children }: IReactProps) => (
 );
 const LoadingProcess = memo(() => {
   const [context] = useContext(Context);
-  const data = context[ActionType.loadingProcess];
+  const data = context[ActionType.LoadingProcess];
   return (
     <div className='absolute top-0 z-50 flex h-full w-full flex-col items-center justify-center space-y-3'>
       <Background />

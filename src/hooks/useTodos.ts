@@ -15,10 +15,10 @@ const useTodos = () => {
   const [, setContext] = useContext(Context);
   const [state, setState] = useState<TResult>({ id: 0, userID: '', title: '', completed: false });
   const fetch = async () => {
-    setContext({ type: ActionType.loadingProcess, state: { enabled: true } });
+    setContext({ type: ActionType.LoadingProcess, state: { enabled: true } });
     const respond = (await Fetcher.get(REST_PATH.test)) as TResult;
     setState(respond);
-    setContext({ type: ActionType.loadingProcess, state: { enabled: false } });
+    setContext({ type: ActionType.LoadingProcess, state: { enabled: false } });
   };
   return [state, fetch] as const;
 };
