@@ -63,7 +63,7 @@ $ npm run build
 ## What's included
 
 - `public` folder will copy to `/dist`
-- `src` folder is reactJs entry point. default file is named as `pages/index.js`
+- `src` folder is reactJs entry point. default file is named as `pages/index.tsx`
 
 
 ## Bugs and feature requests
