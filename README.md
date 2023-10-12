@@ -38,6 +38,25 @@
 $ npm i
 ```
 
+- create `.env` file
+  
+```sh
+touch src/pages/.env
+```
+
+- copy variables to `.env` file.
+
+```text
+VITE_MOCKING=false
+VITE_API_PATH='./api'
+
+VITE_TITLE=title
+VITE_SUBSCRIPTION=description
+VITE_URL=https://jameshsu1125.github.io
+VITE_FACEBOOK_ID=your-facebook-id
+```
+  
+
 - start project
 
 ```sh
