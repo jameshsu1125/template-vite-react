@@ -4,16 +4,11 @@ import { REST_PATH } from '../settings/config';
 import { Context } from '../settings/constant';
 import { ActionType } from '@/settings/type';
 
-export type TResult = {
-  userID: string;
-  id: number;
-  title: string;
-  completed: boolean;
-};
+export type TResult = { userID: string; id: number; title: string; completed: boolean } | undefined;
 
 const useTodos = () => {
   const [, setContext] = useContext(Context);
-  const [state, setState] = useState<TResult>({ id: 0, userID: '', title: '', completed: false });
+  const [state, setState] = useState<TResult>();
   const fetch = async () => {
     setContext({ type: ActionType.LoadingProcess, state: { enabled: true } });
     const respond = (await Fetcher.get(REST_PATH.test)) as TResult;

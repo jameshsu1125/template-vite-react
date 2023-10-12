@@ -34,11 +34,11 @@ const Landing = memo(({ children }: IReactProps) => {
     <OnloadProvider onload={() => setTransition(TransitionType.FadeIn)}>
       <div className='Landing'>
         <LandingContext.Provider value={[state, setState]}>
-          {children}
-          {JSON.stringify(todos)}
+          <h1 className='text-2xl'>{children}</h1>
           <Button transition={transition} onClick={getTodos}>
             Fetch
           </Button>
+          <p className='text-center'>{JSON.stringify(todos)}</p>
         </LandingContext.Provider>
       </div>
     </OnloadProvider>
