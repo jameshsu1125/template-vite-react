@@ -27,8 +27,8 @@ const Pages = memo(() => {
 
   const Page = useMemo(() => {
     const [target] = Object.values(PAGE).filter((data) => data === page);
-    const Element = lazy(() => import(`./${target}/index.tsx`));
     if (target) {
+      const Element = lazy(() => import(`./${target}/index.tsx`));
       return (
         <Suspense fallback=''>
           <Element>Static Pages</Element>
