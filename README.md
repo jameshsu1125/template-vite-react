@@ -102,6 +102,8 @@ $ npm run build
     >  _ActionType_、_AlertType_、_ModalType_
 5. Immutable variable or environment variable - `Screaming Snake Case`. 
     > ex: _PAGE_、<em>VITE_TITLE</em>
+6. general variable - `camelCase`
+   > ex: setState、currentTarget、pinkBackground、innerText
 
 [naming-conventions](https://medium.com/@code.ceeker/naming-conventions-camel-case-pascal-case-kebab-case-and-more-dc4e515b9652)
 
