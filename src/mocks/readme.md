@@ -26,10 +26,10 @@ Set `.env` to determine whether to perform API require interception on the brows
 ### Usage
 
 ```js
-if (process.env.MOCKING === 'true') {
-  // eslint-disable-next-line global-require
-  const { worker } = require('../mocks/browser');
-  worker.start({ serviceWorker: { url: './mockServiceWorker.js' } });
+if (import.meta.env.VITE_MOCKING === 'true') {
+  import('@/mocks/browser').then((e) => {
+    e.worker.start({ serviceWorker: { url: './mockServiceWorker.js' } });
+  });
 }
 ```
 
@@ -42,13 +42,13 @@ Decide what fake data the API will return when development.
 ### Usage
 
 ```js
-import { RestPath } from '@/settings/config';
+import { REST_PATH } from '@/settings/config';
 import { faker } from '@faker-js/faker';
 import { mergePath } from 'lesca-fetcher';
 import { rest } from 'msw';
 
 export const handlers = [
-	rest.get(mergePath(RestPath.test), (_, res, ctx) => {
+	rest.get(mergePath(REST_PATH.test), (_, res, ctx) => {
 		return res(
 			ctx.status(200),
 			ctx.json({
@@ -80,7 +80,7 @@ Fetcher.install({
 #### config
 
 ```js
-export const RestPath = {
+export const REST_PATH = {
 	test: 'todos/1',
 };
 ```
@@ -90,12 +90,12 @@ export const RestPath = {
 ```js
 import Fetcher from 'lesca-fetcher';
 import { useState } from 'react';
-import { RestPath } from '@/settings/config';
+import { REST_PATH } from '@/settings/config';
 
 const useTodos = () => {
   const [state, setState] = useState();
 	const fetch = async () => {
-    const respond = await Fetcher.get(RestPath.test);
+    const respond = await Fetcher.get(REST_PATH.test);
     setState(respond);
   };
   return [state, fetch];
