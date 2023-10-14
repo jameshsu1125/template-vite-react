@@ -33,7 +33,7 @@ export type TLoadingProcessState = {
 };
 
 export interface IState {
-  page: string;
+  page?: string;
   loadingProcess?: TLoadingProcessState;
 }
 
