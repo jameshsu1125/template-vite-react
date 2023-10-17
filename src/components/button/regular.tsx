@@ -1,17 +1,9 @@
 import { IReactProps } from '@/settings/type';
 import { memo, useEffect } from 'react';
-import './index.less';
+import './regular.less';
 
-type TRegularProps = {
-  onClick?: () => void;
-};
-
-const Regular = memo(({ children, onClick }: IReactProps & TRegularProps) => {
+const Regular = memo(({ children }: IReactProps) => {
   useEffect(() => {}, []);
-  return (
-    <button className='button-regular' onClick={onClick}>
-      {children}
-    </button>
-  );
+  return <div className='button-regular'>{children}</div>;
 });
 export default Regular;

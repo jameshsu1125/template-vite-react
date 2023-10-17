@@ -1,13 +1,27 @@
-import { IReactProps } from '@/settings/type';
-import { memo, useEffect } from 'react';
-import './index.less';
+import { IReactProps, TransitionType } from '@/settings/type';
+import useTween from 'lesca-use-tween';
+import { useEffect } from 'react';
 import Regular from './regular';
 
-const Button = ({ children }: IReactProps) => {
-  useEffect(() => {}, []);
-  return <button>{children}</button>;
+type TRegularProps = {
+  onClick?: () => void;
+  transition?: TransitionType;
+};
+
+const Button = ({ children, onClick, transition }: IReactProps & TRegularProps) => {
+  const [style, setStyle] = useTween({ opacity: 0 });
+
+  useEffect(() => {
+    if (transition === TransitionType.FadeIn) setStyle({ opacity: 1 });
+  }, [setStyle, transition]);
+
+  return (
+    <button style={style} onClick={onClick}>
+      {children}
+    </button>
+  );
 };
 
 Button.regular = Regular;
 
-export default memo(Button);
+export default Button;
