@@ -3,12 +3,12 @@ import { PAGE } from '@/settings/config';
 import { Context, InitialState, Reducer } from '@/settings/constant';
 import '@/settings/global.less';
 import { ActionType, TContext } from '@/settings/type';
+import Click from 'lesca-click';
 import Fetcher, { contentType, formatType } from 'lesca-fetcher';
 import React, { Suspense, lazy, memo, useContext, useMemo, useReducer } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Landing from './landing';
-import Click from 'lesca-click';
 
 Fetcher.install({
   hostUrl: import.meta.env.VITE_API_PATH || './api',

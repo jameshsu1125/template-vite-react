@@ -1,10 +1,10 @@
+import Button from '@/components/button';
 import useTodos from '@/hooks/useTodos';
 import { IReactProps, TransitionType } from '@/settings/type';
 import OnloadProvider from 'lesca-react-onload';
 import { memo, useState } from 'react';
 import { LandingContext, LandingState, TLandingState } from './config';
 import './index.less';
-import Button from '@/components/button';
 
 const Landing = memo(({ children }: IReactProps) => {
   const [state, setState] = useState<TLandingState>(LandingState);
