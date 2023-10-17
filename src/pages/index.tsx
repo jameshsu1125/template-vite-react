@@ -8,6 +8,7 @@ import React, { Suspense, lazy, memo, useContext, useMemo, useReducer } from 're
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Landing from './landing';
+import Click from 'lesca-click';
 
 Fetcher.install({
   hostUrl: import.meta.env.VITE_API_PATH || './api',
@@ -20,6 +21,8 @@ if (import.meta.env.VITE_MOCKING === 'true') {
     e.worker.start({ serviceWorker: { url: './mockServiceWorker.js' } });
   });
 }
+
+Click.install();
 
 const Pages = memo(() => {
   const [context] = useContext(Context);
@@ -63,8 +66,8 @@ const App = () => {
   );
 };
 
-if (document.getElementById('root')?.children.length === 0) {
-  ReactDOM.createRoot(document.getElementById('root')!).render(
+if (document.getElementById('app')?.children.length === 0) {
+  ReactDOM.createRoot(document.getElementById('app')!).render(
     <React.StrictMode>
       <App />
     </React.StrictMode>,
