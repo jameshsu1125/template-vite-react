@@ -10,6 +10,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Landing from './landing';
 
+Click.install();
+
 Fetcher.install({
   hostUrl: import.meta.env.VITE_API_PATH || './api',
   contentType: contentType.JSON,
@@ -21,8 +23,6 @@ if (import.meta.env.VITE_MOCKING === 'true') {
     e.worker.start({ serviceWorker: { url: './mockServiceWorker.js' } });
   });
 }
-
-Click.install();
 
 const Pages = memo(() => {
   const [context] = useContext(Context);
