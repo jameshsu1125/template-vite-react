@@ -5,7 +5,7 @@ import '@/settings/global.less';
 import { ActionType, TContext } from '@/settings/type';
 import Click from 'lesca-click';
 import Fetcher, { contentType, formatType } from 'lesca-fetcher';
-import React, { Suspense, lazy, memo, useContext, useMemo, useReducer } from 'react';
+import { Suspense, lazy, memo, useContext, useMemo, useReducer } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Landing from './landing';
@@ -67,9 +67,5 @@ const App = () => {
 };
 
 if (document.getElementById('app')?.children.length === 0) {
-  ReactDOM.createRoot(document.getElementById('app')!).render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
-  );
+  ReactDOM.createRoot(document.getElementById('app')!).render(<App />);
 }
