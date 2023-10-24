@@ -49,5 +49,9 @@ export default defineConfig(({ mode }) => {
         '@': resolve(__dirname, 'src'),
       },
     },
+    server: {
+      open: true,
+      port: 5173,
+    },
   };
 });
