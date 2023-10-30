@@ -75,7 +75,7 @@ $ npm run build
 - use [Typescript](https://www.typescriptlang.org/) for syntax.
 - use [LessCSS](https://lesscss.org/) and [TailwindCSS](https://tailwindcss.com/) for css library.
 - use [ESLint](https://eslint.org/) rules for coding style.
-- use [Mocks](https://mswjs.io/) and [faker](https://github.com/faker-js/faker#readme) for testing API
+- use [Mocks](https://mswjs.io/) and [faker](https://fakerjs.dev/) for testing API
 
 ## What's included
 
