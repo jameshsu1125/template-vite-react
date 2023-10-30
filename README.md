@@ -73,7 +73,7 @@ $ npm run build
 - use [vite](https://vitejs.dev/) for development environment and bundler.
 - use [React](https://react.dev/) for main javascript library.
 - use [Typescript](https://www.typescriptlang.org/) for syntax.
-- use [Less.js](https://lesscss.org/) and [TailwindCSS](https://tailwindcss.com/) for css library.
+- use [LessCSS](https://lesscss.org/) and [TailwindCSS](https://tailwindcss.com/) for css library.
 - use [ESLint](https://eslint.org/) rules for coding style.
 - use [Mocks](https://mswjs.io/) and [faker](https://github.com/faker-js/faker#readme) for testing API
 
