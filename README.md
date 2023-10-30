@@ -89,18 +89,20 @@ $ npm run build
 
 ## naming conventions rules
 
-1. general variable - `camelCase`
-   > ex: setState、currentTarget、pinkBackground、innerText
-2. react components - `PascalCase`.
+1. general variable - `Camel Case`
+   > ex: _setState_、_currentTarget_、_pinkBackground_、_innerText_
+2. react components and class name - `Pascal Case`.
    > ex: _RegularButton_、_NavigationBar_
-3. global variable or state - `PascalCase`.
+3. global variable or state - `Pascal Case`.
    > ex: _Context_、_LandingState_
 4. Immutable variable or environment variable - `Screaming Snake Case`.
    > ex: _PAGE_、<em>VITE_TITLE</em>
 5. type - `I` = interface, `T` = type.
    > ex: _IProps_、_TResult_
-6. enum options - `PascalCase` + `Type`.
-   > _ActionType_、_AlertType_、_ModalType_
+6. enum options - `Pascal Case` + `"Type"`.
+   > ex: _ActionType_、_AlertType_、_ModalType_
+7. class name = `Snake Case`.
+   > ex: _.button-group_、_.button-label_
 
 [naming-conventions](https://medium.com/@code.ceeker/naming-conventions-camel-case-pascal-case-kebab-case-and-more-dc4e515b9652)
 
