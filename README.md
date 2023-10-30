@@ -16,7 +16,6 @@
   </p>
 </p>
 
-
 ## Table of contents
 
 - [Table of contents](#table-of-contents)
@@ -39,7 +38,7 @@ $ npm i
 ```
 
 - create `.env` file
-  
+
 ```sh
 touch src/pages/.env
 ```
@@ -55,7 +54,6 @@ VITE_SUBSCRIPTION=description
 VITE_URL=https://jameshsu1125.github.io
 VITE_FACEBOOK_ID=your-facebook-id
 ```
-  
 
 - start project
 
@@ -84,7 +82,6 @@ $ npm run build
 - `public` folder will copy to `/dist`
 - `src` folder is reactJs entry point. default file is named as `pages/index.tsx`
 
-
 ## Bugs and feature requests
 
 - [Node](https://nodejs.org/en/) version must be above v18
@@ -92,18 +89,18 @@ $ npm run build
 
 ## naming conventions rules
 
-1. react components - `PascalCase`. 
-    > ex: _RegularButton_、_NavigationBar_
-2. type - `I` = interface, `T` = type. 
-    > ex: _IProps_、_TResult_
-3. global variable or state - `PascalCase`.
-    > ex: _Context_、_LandingState_
-4. enum options - `PascalCase` + `Type`. 
-    >  _ActionType_、_AlertType_、_ModalType_
-5. Immutable variable or environment variable - `Screaming Snake Case`. 
-    > ex: _PAGE_、<em>VITE_TITLE</em>
-6. general variable - `camelCase`
+1. general variable - `camelCase`
    > ex: setState、currentTarget、pinkBackground、innerText
+2. react components - `PascalCase`.
+   > ex: _RegularButton_、_NavigationBar_
+3. global variable or state - `PascalCase`.
+   > ex: _Context_、_LandingState_
+4. Immutable variable or environment variable - `Screaming Snake Case`.
+   > ex: _PAGE_、<em>VITE_TITLE</em>
+5. type - `I` = interface, `T` = type.
+   > ex: _IProps_、_TResult_
+6. enum options - `PascalCase` + `Type`.
+   > _ActionType_、_AlertType_、_ModalType_
 
 [naming-conventions](https://medium.com/@code.ceeker/naming-conventions-camel-case-pascal-case-kebab-case-and-more-dc4e515b9652)
 
@@ -126,8 +123,5 @@ Thank customers and some manufacturers for their support.
 ## Copyright and license
 
 Code and documentation copyright 2011-2022 the authors. Code released under the [MIT License](https://reponame/blob/master/LICENSE).
-
-
-
 
 <!-- open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security -->
