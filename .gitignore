@@ -31,5 +31,3 @@ package-lock.json
 
 ##Environment var
 .env
-# Local Netlify folder
-.netlify
