@@ -9,13 +9,10 @@
     "preview": "vite preview",
     "rm": "rm -rf node_modules/ dist/ package-lock.json",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "deploy": "touch dist/.nojekyll && gh-pages -d dist -t true",
-    "serve": "port=3000 tsx watch server/"
+    "deploy": "touch dist/.nojekyll && gh-pages -d dist -t true"
   },
   "dependencies": {
     "@faker-js/faker": "^8.2.0",
-    "@netlify/functions": "^1.6.0",
-    "express": "^4.18.2",
     "lesca-click": "^4.3.5",
     "lesca-fetcher": "^1.1.4",
     "lesca-react-onload": "^1.0.14",
@@ -23,12 +20,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loading": "^2.0.3",
-    "react-router-dom": "^6.17.0",
-    "tsx": "^3.14.0"
+    "react-router-dom": "^6.17.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.20",
-    "@types/node": "^14.18.63",
     "@types/react": "^18.2.33",
     "@types/react-dom": "^18.2.14",
     "@typescript-eslint/eslint-plugin": "^6.9.1",
