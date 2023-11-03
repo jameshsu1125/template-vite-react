@@ -1,5 +1,13 @@
 import { Dispatch, ReactNode } from 'react';
 
+export type Prettify<T> = {
+  [K in keyof T]: T[K];
+};
+
+export type ReadyOnlyProps<T> = {
+  readonly [P in keyof T]: T[P];
+};
+
 export enum ActionType {
   Page = 'page',
   LoadingProcess = 'loadingProcess',
@@ -45,5 +53,5 @@ export interface IAction {
 export type TContext = [IState, Dispatch<IAction>];
 
 export interface IReactProps {
-  children?: ReactNode;
+  readonly children?: ReactNode;
 }
