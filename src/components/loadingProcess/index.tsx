@@ -6,9 +6,11 @@ import ReactLoading from 'react-loading';
 const Background = () => (
   <div className='absolute top-0 h-full w-full bg-backgroundColor opacity-90' />
 );
+
 const Text = ({ children }: IReactProps) => (
   <span className='relative text-textColor'>{children}</span>
 );
+
 const LoadingProcess = memo(() => {
   const [context] = useContext(Context);
   const data = context[ActionType.LoadingProcess];
