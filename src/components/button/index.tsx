@@ -1,12 +1,12 @@
-import { IReactProps, TransitionType } from '@/settings/type';
+import { IReactProps, ReadyOnlyProps, TransitionType } from '@/settings/type';
 import useTween from 'lesca-use-tween';
 import { useEffect } from 'react';
 import Regular from './regular';
 
-type TRegularProps = {
+type TRegularProps = ReadyOnlyProps<{
   onClick?: () => void;
   transition?: TransitionType;
-};
+}>;
 
 const Button = ({ children, onClick, transition }: IReactProps & TRegularProps) => {
   const [style, setStyle] = useTween({ opacity: 0 });

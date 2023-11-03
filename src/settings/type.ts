@@ -1,7 +1,7 @@
 import { Dispatch, ReactNode } from 'react';
 
 export type Prettify<T> = {
-  [K in keyof T]: T[K];
+  [P in keyof T]: T[P];
 };
 
 export type ReadyOnlyProps<T> = {
