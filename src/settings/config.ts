@@ -1,5 +1,5 @@
 export const PAGE = {
-  home: 'home',
+  landing: 'landing',
 };
 
 export const REST_PATH = {

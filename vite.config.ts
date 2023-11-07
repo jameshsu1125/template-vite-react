@@ -7,7 +7,6 @@ import { loadEnv } from 'vite';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, './src/pages');
-
   return {
     base: './',
     root: resolve(__dirname, 'src/pages'),
@@ -18,7 +17,6 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         input: {
           index: resolve(__dirname, 'src/pages/index.html'),
-          server: resolve(__dirname, 'src/pages/server/index.html'),
         },
       },
     },
@@ -36,32 +34,14 @@ export default defineConfig(({ mode }) => {
       react(),
       createHtmlPlugin({
         minify: true,
-        pages: [
-          {
-            filename: '/src/pages/index.html',
-            template: '/src/pages/index.html',
-            injectOptions: {
-              data: {
-                title: env.VITE_TITLE,
-                description: env.VITE_SUBSCRIPTION,
-                url: env.VITE_URL,
-                facebookID: env.VITE_FACEBOOK_ID,
-              },
-            },
+        inject: {
+          data: {
+            title: env.VITE_TITLE,
+            description: env.VITE_SUBSCRIPTION,
+            url: env.VITE_URL,
+            facebookID: env.VITE_FACEBOOK_ID,
           },
-          {
-            filename: '/src/pages/server/index.html',
-            template: '/src/pages/server/index.html',
-            injectOptions: {
-              data: {
-                title: env.VITE_TITLE,
-                description: env.VITE_SUBSCRIPTION,
-                url: env.VITE_URL,
-                facebookID: env.VITE_FACEBOOK_ID,
-              },
-            },
-          },
-        ],
+        },
       }),
     ],
     resolve: {
@@ -72,6 +52,9 @@ export default defineConfig(({ mode }) => {
     server: {
       open: true,
       port: 5173,
+      proxy: {
+        '/api': 'http://localhost:3000',
+      },
     },
   };
 });
