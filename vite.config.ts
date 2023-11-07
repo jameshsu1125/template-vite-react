@@ -1,12 +1,14 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { createHtmlPlugin } from 'vite-plugin-html';
+import { certificateFor } from 'devcert';
 import { resolve } from 'path';
-import { loadEnv } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
+import { createHtmlPlugin } from 'vite-plugin-html';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(async ({ mode }) => {
   const env = loadEnv(mode, './src/pages');
+  const { key, cert } = await certificateFor('localhost');
+
   return {
     base: './',
     root: resolve(__dirname, 'src/pages'),
@@ -52,6 +54,7 @@ export default defineConfig(({ mode }) => {
     server: {
       open: true,
       port: 5173,
+      https: { key, cert },
       proxy: {
         '/api': 'http://localhost:3000',
       },
