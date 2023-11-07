@@ -14,7 +14,7 @@
   "dependencies": {
     "@faker-js/faker": "^8.2.0",
     "lesca-click": "^4.3.5",
-    "lesca-fetcher": "^1.1.5",
+    "lesca-fetcher": "^1.1.6",
     "lesca-react-onload": "^1.0.14",
     "lesca-use-tween": "^3.0.4",
     "react": "^18.2.0",
@@ -37,6 +37,7 @@
     "less": "^4.2.0",
     "msw": "^2.0.3",
     "postcss": "^8.4.31",
+    "prettier-plugin-tailwindcss": "^0.5.6",
     "tailwind-merge": "^2.0.0",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2",

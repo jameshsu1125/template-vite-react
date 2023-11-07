@@ -8,7 +8,7 @@ import Fetcher, { contentType, formatType } from 'lesca-fetcher';
 import { Suspense, lazy, memo, useContext, useMemo, useReducer } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Landing from './landing';
+import Home from './home';
 
 Click.install();
 
@@ -46,7 +46,7 @@ const Pages = memo(() => {
 
 const RoutePages = memo(() => (
   <Routes>
-    <Route path='/' element={<Landing>Route Pages</Landing>} />
+    <Route path='/' element={<Home>Route Pages</Home>} />
   </Routes>
 ));
 
