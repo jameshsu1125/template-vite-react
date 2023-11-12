@@ -8,6 +8,10 @@ export type ReadyOnlyProps<T> = {
   readonly [P in keyof T]: T[P];
 };
 
+export type EditableObject = {
+  [key: string]: any;
+};
+
 export enum ActionType {
   Page = 'page',
   LoadingProcess = 'loadingProcess',
