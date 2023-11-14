@@ -4,7 +4,7 @@ export type Prettify<T> = {
   [P in keyof T]: T[P];
 };
 
-export type ReadyOnlyProps<T> = {
+export type ReadyOnly<T> = {
   readonly [P in keyof T]: T[P];
 };
 
