@@ -108,7 +108,7 @@ $ npm run build
 
 ## Contributing
 
-Please read through our [contributing guidelines](https://github.com/github/docs/blob/main/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
+Please read through our [contributing guidelines](https://github.com/github/docs/blob/main/contributing/README.md). Included are directions for opening issues, coding standards, and notes on development.
 
 Moreover, all HTML and CSS should conform to the [Code Guide](https://github.com/airbnb/javascript), maintained by [Main author](https://github.com/jameshsu1125).
 
