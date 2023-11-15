@@ -124,6 +124,6 @@ Thank customers and some manufacturers for their support.
 
 ## Copyright and license
 
-Code and documentation copyright 2011-2022 the authors. Code released under the [MIT License](https://reponame/blob/master/LICENSE).
+Code and documentation copyright 2011-2022 the authors. Code released under the [MIT License](https://github.com/OM-TW/ogilvy-vote/blob/main/LICENSE).
 
 <!-- open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security -->
