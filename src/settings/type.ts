@@ -1,17 +1,5 @@
 import { Dispatch, ReactNode } from 'react';
 
-export type Prettify<T> = {
-  [P in keyof T]: T[P];
-};
-
-export type ReadyOnly<T> = {
-  readonly [P in keyof T]: T[P];
-};
-
-export type EditableObject = {
-  [key: string]: any;
-};
-
 export enum ActionType {
   Page = 'page',
   LoadingProcess = 'loadingProcess',
