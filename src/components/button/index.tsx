@@ -1,9 +1,10 @@
-import { IReactProps, ReadyOnly, TransitionType } from '@/settings/type';
+import { IReactProps, TransitionType } from '@/settings/type';
 import useTween from 'lesca-use-tween';
 import { useEffect } from 'react';
 import Regular from './regular';
+import { Debug } from '@/settings/type-unity';
 
-type TRegularProps = ReadyOnly<{
+type TRegularProps = Debug<{
   onClick?: () => void;
   transition?: TransitionType;
 }>;
