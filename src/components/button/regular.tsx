@@ -1,9 +1,9 @@
 import { IReactProps } from '@/settings/type';
-import { memo, useEffect } from 'react';
-import './regular.less';
+import { memo } from 'react';
 
-const Regular = memo(({ children }: IReactProps) => {
-  useEffect(() => {}, []);
-  return <div className='button-regular'>{children}</div>;
-});
+const Regular = memo(({ children }: IReactProps) => (
+  <div className='w-full rounded-xl bg-secondary p-3 text-primary hover:bg-primary hover:text-secondary'>
+    {children}
+  </div>
+));
 export default Regular;

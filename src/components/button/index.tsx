@@ -1,23 +1,18 @@
-import { IReactProps, TransitionType } from '@/settings/type';
-import useTween from 'lesca-use-tween';
-import { useEffect } from 'react';
-import Regular from './regular';
+import { IReactProps } from '@/settings/type';
 import { Debug } from '@/settings/type-unity';
+import Regular from './regular';
 
-type TRegularProps = Debug<{
-  onClick?: () => void;
-  transition?: TransitionType;
-}>;
+type TRegularProps = Debug<
+  IReactProps & {
+    className?: string;
+    style?: React.CSSProperties;
+    onClick?: () => void;
+  }
+>;
 
-const Button = ({ children, onClick, transition }: IReactProps & TRegularProps) => {
-  const [style, setStyle] = useTween({ opacity: 0 });
-
-  useEffect(() => {
-    if (transition === TransitionType.FadeIn) setStyle({ opacity: 1 });
-  }, [setStyle, transition]);
-
+const Button = ({ children, className, style, onClick }: TRegularProps) => {
   return (
-    <button style={style} onClick={onClick}>
+    <button className={className} style={style} onClick={onClick}>
       {children}
     </button>
   );
