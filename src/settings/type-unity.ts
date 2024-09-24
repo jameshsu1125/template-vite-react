@@ -1,9 +1,5 @@
-export type Debug<T> = { [P in keyof T]: T[P] };
-// type A = Debug<{ a: 1 } & { b : 2 }> // Expect: { a: 1, b: 2 }
-
-export type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2
-  ? true
-  : false;
+export type Equal<X, Y> =
+  (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? true : false;
 // type B = Equal<string, string> // Expect true
 
 export type ReadyOnly<T> = { readonly [P in keyof T]: T[P] };
@@ -17,8 +13,6 @@ export type Union<U> = (U extends any ? (k: U) => void : never) extends (k: infe
   : never;
 // type A = Union<{ a: 1 } | { b: 2 }> // Expect: { a: 1, b: 2 }
 
-export type ExpectValidArgs<
-  FUNC extends (...args: any[]) => any,
-  ARGS extends any[],
-> = ARGS extends Parameters<FUNC> ? true : false;
+export type ExpectValidArgs<FUNC extends (...args: any[]) => any, ARGS extends any[]> =
+  ARGS extends Parameters<FUNC> ? true : false;
 // type A = ExpectValidArgs<(a: string, b: number) => void, [string, number]> // Expect true
