@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@faker-js/faker": "^9.2.0",
+    "@okta/okta-auth-js": "^7.8.1",
+    "@okta/okta-react": "^6.9.0",
     "lesca-click": "^4.3.5",
     "lesca-fetcher": "^1.1.7",
     "lesca-react-onload": "^1.0.18",
