@@ -2,15 +2,14 @@ import LoadingProcess from '@/components/loadingProcess';
 import { Context, InitialState, Reducer } from '@/settings/constant';
 import '@/settings/global.less';
 import { ActionType, TContext } from '@/settings/type';
-import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
-import { Security } from '@okta/okta-react';
 import Click from 'lesca-click';
 import Fetcher, { contentType, formatType } from 'lesca-fetcher';
 import { memo, useMemo, useReducer } from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './home';
 import { RequiredAuth } from './home/sc';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 Click.install();
 
@@ -26,26 +25,20 @@ if (import.meta.env.VITE_MOCKING === 'true') {
   });
 }
 
-const oktaAuth = new OktaAuth({
-  issuer: 'https://dev-30544958.okta.com/oauth2/default',
-  clientId: '0oalkdinjqOPuXgwn5d7',
-  redirectUri: window.location.origin + '/login/',
-});
-
-const RoutePages = memo(() => {
-  const history = useNavigate();
-  const restoreOriginalUri = async (_oktaAuth: OktaAuth, originalUri: any) => {
-    history(toRelativeUrl(originalUri || '/', window.location.origin));
-  };
-  return (
-    <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri}>
-      <Routes>
-        <Route path='/' element={<Home>Route Pages</Home>} />
-        <Route path='/login' element={<RequiredAuth />} />
-      </Routes>
-    </Security>
-  );
-});
+const RoutePages = memo(() => (
+  <Auth0Provider
+    domain='mmorpg.jp.auth0.com'
+    clientId='UMn6tZztctVVutTlRcgEaD0Gv7uBwuW3'
+    authorizationParams={{
+      redirect_uri: window.location.origin,
+    }}
+  >
+    <Routes>
+      <Route path='/' element={<Home>Route Pages</Home>} />
+      <Route path='/login' element={<RequiredAuth />} />
+    </Routes>
+  </Auth0Provider>
+));
 
 const App = () => {
   const [state, setState] = useReducer(Reducer, InitialState);

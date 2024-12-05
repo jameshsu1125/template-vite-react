@@ -12,6 +12,7 @@
     "deploy": "touch dist/.nojekyll && gh-pages -d dist -t true"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.2.4",
     "@faker-js/faker": "^9.2.0",
     "@okta/okta-auth-js": "^7.8.1",
     "@okta/okta-react": "^6.9.0",

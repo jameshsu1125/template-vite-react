@@ -1,25 +1,31 @@
-import Button from '@/components/button';
-import useTodos from '@/hooks/useTodos';
 import { IReactProps } from '@/settings/type';
+import { useAuth0 } from '@auth0/auth0-react';
 import { memo, useState } from 'react';
-import { HomeContext, HomeState, THomeState } from './config';
+import { HomeState, THomeState } from './config';
 import './index.less';
 
 const Home = memo(({ children }: IReactProps) => {
+  const { isLoading, isAuthenticated, error, user, loginWithRedirect, logout } = useAuth0();
   const [state, setState] = useState<THomeState>(HomeState);
-  const [todos, getTodos] = useTodos();
 
-  return (
-    <div className='Home'>
-      <HomeContext.Provider value={[state, setState]}>
-        <h1 className='text-2xl'>{children}</h1>
-        <Button onClick={getTodos}>
-          <Button.regular>Fetch</Button.regular>
-        </Button>
-        <p className='text-center'>{JSON.stringify(todos)}</p>
-      </HomeContext.Provider>
-    </div>
-  );
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Oops... {error.message}</div>;
+  }
+
+  if (isAuthenticated) {
+    return (
+      <div>
+        Hello {user?.name}{' '}
+        <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+          Log out
+        </button>
+      </div>
+    );
+  }
+  return <button onClick={() => loginWithRedirect()}>Log in</button>;
 });
 
 export default Home;
