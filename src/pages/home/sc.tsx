@@ -6,6 +6,8 @@ import { Outlet } from 'react-router-dom';
 export const RequiredAuth = () => {
   const { oktaAuth, authState } = useOktaAuth();
 
+  console.log('RequiredAuth', authState, oktaAuth);
+
   useEffect(() => {
     if (!authState) {
       return;
