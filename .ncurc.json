@@ -1,4 +1,4 @@
 {
   "upgrade": false,
-  "reject": ["tailwindcss", "tailwind-merge", "prettier-plugin-tailwindcss"]
+  "reject": []
 }

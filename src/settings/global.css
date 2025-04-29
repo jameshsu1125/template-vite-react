@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+
+body {
+  margin: 0;
+
+  text-size-adjust: none;
+  overscroll-behavior: none;
+  @apply bg-backgroundColor text-textColor;
+}
+
+.App {
+  @apply absolute h-full w-full;
+}
+
+@theme {
+  --color-backgroundColor: #111;
+  --color-textColor: #eee;
+  --color-primary: #870000;
+  --color-secondary: #ff6600;
+  --color-tertiary: #ff0066;
+  --color-quaternary: #00ff00;
+}
