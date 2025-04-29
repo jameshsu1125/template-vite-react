@@ -26,6 +26,7 @@ export default defineConfig(async ({ mode }) => {
       preprocessorOptions: {
         less: {
           math: 'always',
+          globalVars: {},
         },
       },
     },
