@@ -1,4 +1,4 @@
 {
   "upgrade": false,
-  "reject": ["less"]
+  "reject": []
 }
