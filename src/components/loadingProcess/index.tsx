@@ -1,23 +1,38 @@
 import { Context } from '@/settings/constant';
-import { ActionType, IReactProps } from '@/settings/type';
+import { ActionType, IReactProps, LoadingProcessType } from '@/settings/type';
 import { memo, useContext } from 'react';
-import ReactLoading from 'react-loading';
+import { twMerge } from 'tailwind-merge';
+import './index.less';
 
 const Background = () => (
-  <div className='absolute top-0 h-full w-full bg-backgroundColor opacity-90' />
+  <div className='bg-backgroundColor absolute top-0 h-full w-full opacity-90' />
 );
 
 const Text = ({ children }: IReactProps) => (
-  <span className='relative text-textColor'>{children}</span>
+  <span className='text-textColor relative'>{children}</span>
 );
+
+const LoadingSvg = ({ className, type }: { className: string; type?: string }) => {
+  return (
+    <div
+      className={twMerge(
+        className,
+        'mask-contain mask-center',
+        'h-16 w-16',
+        'bg-white',
+        type || LoadingProcessType.Spin,
+      )}
+    />
+  );
+};
 
 const LoadingProcess = memo(() => {
   const [context] = useContext(Context);
   const data = context[ActionType.LoadingProcess];
   return (
-    <div className='absolute top-0 z-50 flex h-full w-full flex-col items-center justify-center space-y-3'>
+    <div className='LoadingProcess absolute top-0 z-50 flex h-full w-full flex-col items-center justify-center space-y-3'>
       <Background />
-      <ReactLoading className='relative' type={data?.type} />
+      <LoadingSvg className='relative' type={data?.type} />
       {data?.body && <Text>{data.body}</Text>}
     </div>
   );
