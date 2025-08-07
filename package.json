@@ -16,7 +16,7 @@
     "lesca-click": "^4.3.5",
     "lesca-fetcher": "^1.2.2",
     "lesca-react-onload": "^2.0.10",
-    "lesca-use-tween": "^3.1.2",
+    "lesca-use-tween": "^4.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-loading": "^2.0.3",
