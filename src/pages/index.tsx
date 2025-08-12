@@ -33,7 +33,6 @@ const Pages = memo(() => {
     if (target) {
       const Element = lazy(() => import(`./${target}/index.tsx`));
       return (
-        // code splitting...
         <Suspense fallback=''>
           <Element>Static Pages</Element>
         </Suspense>
