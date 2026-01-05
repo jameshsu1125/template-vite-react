@@ -56,7 +56,6 @@ const Uid = (len) => {
         },
       ])
       .then(async (answers) => {
-        console.log(answers);
         process.env.NODE_ENV = 'production';
         const id = Uid(10);
         const date = new Date().toISOString().split('T')[0];
