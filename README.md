@@ -20,6 +20,7 @@
 
 - [Table of contents](#table-of-contents)
 - [Quick start](#quick-start)
+- [before deploy](#before-deploy)
 - [Status](#status)
 - [What's included](#whats-included)
 - [Bugs and feature requests](#bugs-and-feature-requests)
@@ -66,6 +67,21 @@ $ npm run dev
 ```sh
 $ npm run build
 ```
+
+## before deploy
+
+- deploy on `netlify`
+  - create `Netlify` site
+
+    ```sh
+    netlify sites:create
+    ```
+
+  - or link `Netlify` site id
+
+    ```sh
+    netlify link
+    ```
 
 ## Status
 
