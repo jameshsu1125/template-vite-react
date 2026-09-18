@@ -2,6 +2,10 @@ import chalk from 'chalk';
 import { execSync } from 'child_process';
 import inquirer from 'inquirer';
 import process from 'process';
+import { loadEnv } from 'vite';
+import { deployToNetlify, openUrl } from './misc.js';
+
+const env = loadEnv('production', './src/pages');
 
 const message = {
   question: 'Which app do you want to deploy?',
@@ -31,20 +35,21 @@ const message = {
           case 'gh-pages':
             try {
               execSync('npx gh-pages -d dist', { stdio: 'inherit' });
+              openUrl(env.VITE_URL);
             } catch (error) {
               console.log(chalk.redBright('gh-pages deploy failed:', error.message));
             }
             break;
           case 'netlify-draft':
             try {
-              execSync('netlify deploy --dir=dist', { stdio: 'inherit' });
+              deployToNetlify('--dir=dist');
             } catch (error) {
               console.log(chalk.redBright('Netlify deploy failed:', error.message));
             }
             break;
           case 'netlify-prod':
             try {
-              execSync('netlify deploy --prod --dir=dist', { stdio: 'inherit' });
+              deployToNetlify('--prod --dir=dist');
             } catch (error) {
               console.log(chalk.redBright('Netlify deploy failed:', error.message));
             }
