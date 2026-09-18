@@ -14,7 +14,6 @@ export const deployToNetlify = (options) => {
     stdio: ['inherit', 'pipe', 'inherit'],
   });
   const result = JSON.parse(output);
-
-  console.log(output);
+  if (result.site_name) console.log(chalk.cyan(`Site name: ${result.site_name}`));
   openUrl(result.deploy_url || result.ssl_url || result.url);
 };
