@@ -35,7 +35,7 @@ const message = {
           case 'gh-pages':
             try {
               execSync('npx gh-pages -d dist', { stdio: 'inherit' });
-              openUrl(env.VITE_URL);
+              openUrl('gh-pages', env.VITE_URL);
             } catch (error) {
               console.log(chalk.redBright('gh-pages deploy failed:', error.message));
             }
