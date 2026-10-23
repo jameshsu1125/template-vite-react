@@ -42,14 +42,14 @@ const message = {
             break;
           case 'netlify-draft':
             try {
-              deployToNetlify('--dir=dist');
+              await deployToNetlify(['--dir=dist']);
             } catch (error) {
               console.log(chalk.redBright('Netlify deploy failed:', error.message));
             }
             break;
           case 'netlify-prod':
             try {
-              deployToNetlify('--prod --dir=dist');
+              await deployToNetlify(['--prod', '--dir=dist']);
             } catch (error) {
               console.log(chalk.redBright('Netlify deploy failed:', error.message));
             }
