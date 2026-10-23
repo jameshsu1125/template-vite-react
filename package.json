@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "rm": "rm -rf node_modules/ dist/ package-lock.json",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "deploy": "node ./scripts/deploy.js"
+    "deploy": "node ./scripts/deploy.js",
+    "cdn:upload": "node ./scripts/cdn-upload.js"
   },
   "dependencies": {
     "@faker-js/faker": "^10.6.0",
@@ -37,6 +38,7 @@
     "msw": "3.0.3",
     "postcss": "^8.5.30",
     "prettier-plugin-tailwindcss": "^0.8.1",
+    "ssh2-sftp-client": "^12.1.1",
     "tailwind-merge": "^3.7.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.9.3",
