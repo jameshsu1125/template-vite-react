@@ -7,6 +7,7 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import mkcert from 'vite-plugin-mkcert';
 import { normalizeFolder } from './scripts/lib/assets.js';
 import postcssCdnUrl from './scripts/postcss-cdn-url.js';
+import viteCdnAssets from './scripts/vite-cdn-assets.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
@@ -14,7 +15,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 export default defineConfig(async ({ mode }) => {
   const env = loadEnv(mode, './src/pages');
 
-  // 圖片、字型來源開關：VITE_IMAGE_SOURCE=local | cdn（設定在 src/pages/.env.local）
+  // 圖片、字型、音檔來源開關：VITE_IMAGE_SOURCE=local | cdn（設定在 src/pages/.env.local）
   const useCdn = env.VITE_IMAGE_SOURCE === 'cdn';
   const cdnUrl = (env.VITE_CDN_URL || '').replace(/\/+$/, '');
   if (useCdn && !cdnUrl) throw new Error('VITE_IMAGE_SOURCE=cdn 需要設定 VITE_CDN_URL');
@@ -46,6 +47,7 @@ export default defineConfig(async ({ mode }) => {
       },
     },
     plugins: [
+      viteCdnAssets({ enabled: useCdn, cdnUrl, folder: cdnFolder }),
       react(),
       createHtmlPlugin({
         minify: true,

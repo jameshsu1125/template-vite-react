@@ -6,9 +6,10 @@ import { fileURLToPath } from 'url';
 export const ROOT = resolve(fileURLToPath(new URL('.', import.meta.url)), '../..');
 export const IMAGE_EXTENSIONS = ['.svg', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.avif', '.ico'];
 export const FONT_EXTENSIONS = ['.woff2', '.woff', '.ttf', '.otf'];
-const ASSET_EXTENSIONS = [...IMAGE_EXTENSIONS, ...FONT_EXTENSIONS];
+export const AUDIO_EXTENSIONS = ['.mp3', '.wav', '.ogg', '.m4a', '.aac'];
+const ASSET_EXTENSIONS = [...IMAGE_EXTENSIONS, ...FONT_EXTENSIONS, ...AUDIO_EXTENSIONS];
 
-// 靜態資源（圖片、字型）來源資料夾 → CDN 上的根目錄（以資料夾內的相對路徑對應）
+// 靜態資源（圖片、字型、音檔）來源資料夾 → CDN 上的根目錄（以資料夾內的相對路徑對應）
 const SOURCE_DIRS = [resolve(ROOT, 'src'), resolve(ROOT, 'public')];
 
 export const isAsset = (file) => ASSET_EXTENSIONS.includes(extname(file).toLowerCase());
@@ -48,7 +49,7 @@ export const toCdnUrl = (cdnUrl, folder, absFile) => {
   return `${cdnUrl.replace(/\/+$/, '')}/${folder}/${remotePath}?v=${hashFile(absFile)}`;
 };
 
-/** 列出所有要上傳的圖片與字型（remotePath 已含資料夾） */
+/** 列出所有要上傳的圖片、字型與音檔（remotePath 已含資料夾） */
 export const listAssets = (folder) =>
   SOURCE_DIRS.filter(existsSync)
     .flatMap(walk)

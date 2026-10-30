@@ -10,7 +10,8 @@
     "rm": "rm -rf node_modules/ dist/ package-lock.json",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "deploy": "node ./scripts/deploy.js",
-    "cdn:upload": "node ./scripts/cdn-upload.js"
+    "cdn:upload": "node ./scripts/cdn-upload.js",
+    "cdn:purge": "node ./scripts/cdn-purge.js"
   },
   "dependencies": {
     "@faker-js/faker": "^10.6.0",
