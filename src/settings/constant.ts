@@ -7,7 +7,10 @@ import {
   LoadingProcessType,
   TContext,
   TLoadingProcessState,
+  TSoundsState,
 } from './type';
+
+export const SoundsState: TSoundsState = { instance: null, loaded: false };
 
 export const LoadingProcessState: TLoadingProcessState = {
   enabled: false,
@@ -18,6 +21,7 @@ export const LoadingProcessState: TLoadingProcessState = {
 export const InitialState: IState = {
   [ActionType.Page]: PAGE.home,
   [ActionType.LoadingProcess]: LoadingProcessState,
+  [ActionType.Sounds]: SoundsState,
 };
 
 export const Context = createContext<TContext>([InitialState, () => {}]);
