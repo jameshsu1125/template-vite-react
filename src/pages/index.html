@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-tw">
   <head>
     <meta charset="utf-8" />
@@ -19,6 +19,19 @@
     <link href="<%= imageBase %>img/favicon.ico" rel="icon" type="image/x-icon" />
     <meta name="apple-mobile-web-app-capable" content="no" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=<%= googleAnalyticsID %>"
+    ></script>
+    <script type="text/javascript">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', '<%= googleAnalyticsID %>');
+    </script>
   </head>
   <body>
     <div id="app"></div>
