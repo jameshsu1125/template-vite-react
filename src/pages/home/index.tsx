@@ -18,10 +18,10 @@ const Home = memo(({ children }: IReactProps) => {
         <Button
           onClick={() => {
             getTodos();
-            sounds?.instance?.play('click');
+            sounds?.track?.play('click');
           }}
         >
-          <Button.regular>Fetch</Button.regular>
+          <Button.Primary>Fetch</Button.Primary>
         </Button>
         <p className='text-center'>{JSON.stringify(todos)}</p>
       </HomeContext.Provider>

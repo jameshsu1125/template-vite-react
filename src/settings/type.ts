@@ -36,7 +36,7 @@ export type TLoadingProcessState = {
 
 export type TSoundsState = {
   // 使用者第一次點擊畫面時才建立（瀏覽器要求有手勢才能播放聲音），在那之前是 null
-  instance?: Sounds | null;
+  track?: Sounds | null;
   // 全部音檔讀取完成
   loaded?: boolean;
 };

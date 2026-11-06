@@ -2,19 +2,21 @@ import { Context } from '@/settings/constant';
 import { IReactProps } from '@/settings/type';
 import { useContext } from 'react';
 import { twMerge } from 'tailwind-merge';
-import Regular from './regular';
+import Primary from './primary';
 
 type TRegularProps = IReactProps & {
   id?: string;
   className?: string;
-  disabled?: boolean;
   style?: React.CSSProperties;
-  onClick?: () => void;
+  disabled?: boolean;
   dataset?: string;
+
+  onClick?: () => void;
 };
 
 const Button = ({ id, children, className, style, onClick, dataset, disabled }: TRegularProps) => {
   const [{ sounds }] = useContext(Context);
+
   return (
     <button
       id={id}
@@ -23,7 +25,7 @@ const Button = ({ id, children, className, style, onClick, dataset, disabled }: 
       style={style}
       onClick={() => {
         onClick?.();
-        sounds?.instance?.play('click');
+        sounds?.track?.play('click');
       }}
       data-dataset={dataset}
     >
@@ -32,6 +34,6 @@ const Button = ({ id, children, className, style, onClick, dataset, disabled }: 
   );
 };
 
-Button.Regular = Regular;
+Button.Primary = Primary;
 
 export default Button;

@@ -5,9 +5,13 @@ body {
 
   text-size-adjust: none;
   overscroll-behavior: none;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'SimHei', 'DengXian', 'Microsoft YaHei', 'PingFang TC',
+    'Microsoft JhengHei', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+
   @apply bg-base-100 text-base-content;
 }
 
 .App {
-  @apply absolute h-full w-full;
+  @apply relative flex h-full w-full flex-col items-center justify-center;
 }

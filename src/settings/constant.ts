@@ -10,7 +10,7 @@ import {
   TSoundsState,
 } from './type';
 
-export const SoundsState: TSoundsState = { instance: null, loaded: false };
+export const SoundsState: TSoundsState = { track: null, loaded: false };
 
 export const LoadingProcessState: TLoadingProcessState = {
   enabled: false,

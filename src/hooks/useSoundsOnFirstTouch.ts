@@ -25,7 +25,7 @@ const useSoundsOnFirstTouch = (dispatch: Dispatch<IAction>) => {
         onError: (message) => console.warn(`[Sounds] ${message}`),
       });
       // 同步寫入 Context，確保同一次點擊的 click handler 已拿得到 instance（載入完成後會自動補播）
-      flushSync(() => dispatch({ type: ActionType.Sounds, state: { instance: sounds } }));
+      flushSync(() => dispatch({ type: ActionType.Sounds, state: { track: sounds } }));
     }
 
     FIRST_TOUCH_EVENTS.forEach((event) => document.addEventListener(event, load, true));
