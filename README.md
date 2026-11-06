@@ -107,7 +107,7 @@ env 目錄是 `src/pages`。只有 `VITE_` 開頭的變數會進前端；`BUNNY_
 
 ## 文件索引
 
-- [AGENT.md](./AGENT.md)：給 AI 代理閱讀的完整規則與規格（也適合人類查閱）
+- [AGENTS.md](./AGENTS.md)：給 AI 代理閱讀的完整規則與規格（也適合人類查閱）
 - [src/components/readme.md](./src/components/readme.md)：元件用法（Button、LoadingProcess、Sounds）
 - [src/components/sounds/readme.md](./src/components/sounds/readme.md)：音效管理
 - [src/hooks/readme.md](./src/hooks/readme.md)：Hooks

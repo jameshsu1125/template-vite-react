@@ -1,4 +1,4 @@
-# AGENT.md
+# AGENTS.md
 
 給 AI 代理（Claude Code、Codex、Cursor 等）閱讀的專案規則與規格。動手前先讀完「必守規則」，再依任務查閱對應章節。
 
@@ -111,7 +111,7 @@ Vite + React 19 + TypeScript 的前端專案模板（template-vite-react），�
 
 ```text
 .
-├── AGENT.md                      # 本檔
+├── AGENTS.md                      # 本檔
 ├── README.md                     # 人類入口文件
 ├── fonts/
 │   ├── extract.md / extract.tsx  # 字型子集（subset）用的字元清單，不參與建置

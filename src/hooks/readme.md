@@ -1,6 +1,6 @@
 # Hooks
 
-自訂 Hook。規格細節見專案根目錄 [AGENT.md](../../AGENT.md) 第 9 章。
+自訂 Hook。規格細節見專案根目錄 [AGENTS.md](../../AGENTS.md) 第 9 章。
 
 ## Table of hooks
 
@@ -67,7 +67,7 @@ const [todos, getTodos] = useTodos();
 ## 新增 Hook
 
 1. 建立 `src/hooks/use<Name>.ts`，`export default`，回傳 tuple（`[state, fn] as const`）。
-2. 在本檔加一節，並更新 [AGENT.md](../../AGENT.md) 第 9 章。
+2. 在本檔加一節，並更新 [AGENTS.md](../../AGENTS.md) 第 9 章。
 
 文件範本：
 

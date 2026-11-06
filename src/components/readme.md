@@ -1,6 +1,6 @@
 # Components
 
-可重用元件。完整規格（含行為細節）見專案根目錄 [AGENT.md](../../AGENT.md) 第 8 章。
+可重用元件。完整規格（含行為細節）見專案根目錄 [AGENTS.md](../../AGENTS.md) 第 8 章。
 
 ## Table of components
 
@@ -118,7 +118,7 @@ sounds?.track?.play('click');
 
 1. 建立 `src/components/<name>/index.tsx`（`export default`），需要樣式再加 `index.less`（開頭 `@import url('@/settings/global.css');` 才能使用 `@apply`）。
 2. props 型別以 `IReactProps` 擴充：`type TProps = IReactProps & { ... }`。
-3. 在本檔加一節（Usage + Props 表），並更新 [AGENT.md](../../AGENT.md) 第 8 章。
+3. 在本檔加一節（Usage + Props 表），並更新 [AGENTS.md](../../AGENTS.md) 第 8 章。
 
 文件範本：
 
