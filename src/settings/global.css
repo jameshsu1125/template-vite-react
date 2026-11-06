@@ -5,7 +5,7 @@ body {
 
   text-size-adjust: none;
   overscroll-behavior: none;
-  @apply bg-backgroundColor text-textColor;
+  @apply bg-base-100 text-base-content;
 }
 
 .App {
