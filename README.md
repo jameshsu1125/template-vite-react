@@ -3,8 +3,8 @@
 [![React](https://img.shields.io/badge/-ReactJs-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://zh-hant.reactjs.org/)
 [![TS](https://img.shields.io/badge/Typescript-4277c0?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![LESS](https://img.shields.io/badge/Less-1d365d?style=for-the-badge&logo=less&logoColor=white)](https://lesscss.org/)
-[![TW](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=npm&logoColor=white)](https://lesscss.org/)
-[![ROUTER](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=npm&logoColor=white)](https://lesscss.org/)
+[![TW](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![ROUTER](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white)](https://reactrouter.com/)
 
 <p align="center">
   <a href="https://github.com/jameshsu1125">
@@ -20,6 +20,10 @@
 
 - [Table of contents](#table-of-contents)
 - [Quick start](#quick-start)
+- [指令](#指令)
+- [專案結構](#專案結構)
+- [環境變數](#環境變數)
+- [文件索引](#文件索引)
 - [before deploy](#before-deploy)
 - [圖片與字型 CDN（Bunny）](#圖片與字型-cdnbunny)
 - [Status](#status)
@@ -39,23 +43,13 @@
 $ npm i
 ```
 
-- create `.env` file
+- create `.env` file（範本是 `src/pages/.env.defaults`，Vite 不會自動讀它，要複製一份）
 
 ```sh
-touch src/pages/.env
+cp src/pages/.env.defaults src/pages/.env
 ```
 
-- copy variables to `.env` file.
-
-```text
-VITE_MOCKING=false
-VITE_API_PATH='./api'
-
-VITE_TITLE=title
-VITE_SUBSCRIPTION=description
-VITE_URL=https://jameshsu1125.github.io
-VITE_FACEBOOK_ID=your-facebook-id
-```
+- 依需求修改變數，完整說明見[環境變數](#環境變數)。
 
 - start project
 
@@ -68,6 +62,57 @@ $ npm run dev
 ```sh
 $ npm run build
 ```
+
+## 指令
+
+| 指令                               | 說明                                                                  |
+| :--------------------------------- | :-------------------------------------------------------------------- |
+| `npm run dev`                      | 開發伺服器（HTTPS，port 5173；`/api` 代理到 `http://localhost:3000`） |
+| `npm run build`                    | `tsc` 型別檢查後建置到 `/dist`                                        |
+| `npm run preview`                  | 預覽 `/dist`                                                          |
+| `npm run lint`                     | ESLint（flat config：`eslint.config.js`）                             |
+| `npm run deploy`                   | 互動選單：`gh-pages`、`netlify-draft`、`netlify-prod`（先 build）     |
+| `npm run cdn:upload` / `cdn:purge` | Bunny CDN 上傳／清快取，見下方 CDN 章節                               |
+| `npm run rm`                       | 刪除 `node_modules/`、`dist/`、`package-lock.json`                    |
+
+## 專案結構
+
+```text
+public/                 原樣複製到 /dist（img/ 放 og 圖、favicon；mockServiceWorker.js 為 msw 產生）
+scripts/                部署與 CDN 腳本
+src/
+├── components/         可重用元件：button、loadingProcess、sounds
+├── hooks/              useMedia、useSoundsOnFirstTouch、useTodos
+├── mocks/              msw 設定與假資料
+├── pages/              Vite root：index.html、index.tsx（進入點）、home/、.env.defaults
+└── settings/           config.ts（PAGE、REST_PATH）、constant.ts、type.ts、global.css
+fonts/                  字型子集用字元清單
+tailwind.config.css     Tailwind v4 色票（@theme）
+```
+
+路徑 alias：`@/` → `src/`。
+
+## 環境變數
+
+env 目錄是 `src/pages`。只有 `VITE_` 開頭的變數會進前端；`BUNNY_*` 只給 `scripts/` 使用，且只能放在 `src/pages/.env.local`（已被 git 忽略）。
+
+| 變數                                                                               | 說明                                                   |
+| :--------------------------------------------------------------------------------- | :----------------------------------------------------- |
+| `VITE_MOCKING`                                                                     | `true` 時啟用 msw 攔截 API                             |
+| `VITE_API_PATH`                                                                    | API 網址（`Fetcher` 的 `hostUrl`，未設定時為 `./api`） |
+| `VITE_TITLE`、`VITE_SUBSCRIPTION`、`VITE_URL`、`VITE_FACEBOOK_ID`                  | `index.html` 的 title 與 og meta                       |
+| `VITE_GOOGLE_ANALYTICS_ID`、`VITE_FACEBOOK_ANALYTICS_ID`                           | 分析追蹤 ID（可留空）                                  |
+| `VITE_IMAGE_SOURCE`、`VITE_CDN_URL`、`VITE_CDN_FOLDER`                             | 圖片／字型／音檔來源，見 CDN 章節                      |
+| `BUNNY_STORAGE_ZONE`、`BUNNY_STORAGE_PASSWORD`、`BUNNY_SFTP_HOST`、`BUNNY_API_KEY` | Bunny 上傳與清快取                                     |
+
+## 文件索引
+
+- [AGENT.md](./AGENT.md)：給 AI 代理閱讀的完整規則與規格（也適合人類查閱）
+- [src/components/readme.md](./src/components/readme.md)：元件用法（Button、LoadingProcess、Sounds）
+- [src/components/sounds/readme.md](./src/components/sounds/readme.md)：音效管理
+- [src/hooks/readme.md](./src/hooks/readme.md)：Hooks
+- [src/mocks/readme.md](./src/mocks/readme.md)：Mock Service Worker
+- [fonts/extract.md](./fonts/extract.md)：字型子集字元清單
 
 ## before deploy
 
@@ -136,15 +181,18 @@ $ npm run build
 - use [LessCSS](https://lesscss.org/) and [TailwindCSS](https://tailwindcss.com/) for css library.
 - use [ESLint](https://eslint.org/) rules for coding style.
 - use [Mocks](https://mswjs.io/) and [faker](https://fakerjs.dev/) for testing API
+- use [Howler.js](https://howlerjs.com/) for sounds, [lesca-fetcher](https://www.npmjs.com/package/lesca-fetcher) for API requests
 
 ## What's included
 
 - `public` folder will copy to `/dist`
 - `src` folder is reactJs entry point. default file is named as `pages/index.tsx`
+- 頁面切換二選一：`src/settings/config.ts` 的 `PAGE_MODE` 設為 `'route'`（網址路由，預設）或 `'static'`（依 Context 的 `page` 切換）
+- Vite 的 `root` 是 `src/pages`，建置輸出到專案根目錄的 `/dist`
 
 ## Bugs and feature requests
 
-- [Node](https://nodejs.org/en/) version must be above v18
+- [Node](https://nodejs.org/en/) 版本需符合 Vite 8 的要求（20.19+ 或 22.12+）
 - I will not maintain when this project is closed
 
 ## naming conventions rules
@@ -161,8 +209,8 @@ $ npm run build
    > ex: _IProps_、_TResult_
 6. enum options - `Pascal Case` + `"Type"`.
    > ex: _ActionType_、_AlertType_、_ModalType_
-7. class name = `Snake Case`.
-   > ex: _.button-group_、_.button-label_
+7. 元件根節點 class - `Pascal Case`，其餘樣式用 Tailwind utility。
+   > ex: _.Home_、_.Primary_、_.LoadingProcess_
 
 [naming-conventions](https://medium.com/@code.ceeker/naming-conventions-camel-case-pascal-case-kebab-case-and-more-dc4e515b9652)
 

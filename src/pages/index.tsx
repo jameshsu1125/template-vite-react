@@ -1,12 +1,12 @@
 import LoadingProcess from '@/components/loadingProcess';
 import useSoundsOnFirstTouch from '@/hooks/useSoundsOnFirstTouch';
-import { PAGE } from '@/settings/config';
+import { PAGE, PAGE_MODE } from '@/settings/config';
 import { Context, InitialState, Reducer } from '@/settings/constant';
 import '@/settings/global.css';
-import { ActionType, TContext } from '@/settings/type';
+import { ActionType, IReactProps, TContext } from '@/settings/type';
 import Click from 'lesca-click';
 import Fetcher, { contentType, formatType } from 'lesca-fetcher';
-import { Suspense, lazy, memo, useContext, useMemo, useReducer } from 'react';
+import { ComponentType, Suspense, lazy, memo, useContext, useMemo, useReducer } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './home';
@@ -25,26 +25,29 @@ if (import.meta.env.VITE_MOCKING === 'true') {
   });
 }
 
-const Pages = memo(() => {
+// Static Pages：頁面元件在模組載入時就建好（不可在 render 內 lazy），依 PAGE 的值對應 ./<page>/index.tsx
+const pageModules = import.meta.glob('./*/index.tsx');
+const StaticPageList = Object.fromEntries(
+  Object.values(PAGE).map((name) => [
+    name,
+    lazy(
+      pageModules[`./${name}/index.tsx`] as () => Promise<{ default: ComponentType<IReactProps> }>,
+    ),
+  ]),
+);
+
+const StaticPages = memo(() => {
   const [context] = useContext(Context);
-  const page = context[ActionType.Page];
-
-  const Page = useMemo(() => {
-    const [target] = Object.values(PAGE).filter((data) => data === page);
-    if (target) {
-      const Element = lazy(() => import(`./${target}/index.tsx`));
-      return (
-        <Suspense fallback=''>
-          <Element>Static Pages</Element>
-        </Suspense>
-      );
-    }
-    return null;
-  }, [page]);
-
-  return Page;
+  const Page = StaticPageList[context[ActionType.Page] ?? ''];
+  if (!Page) return null;
+  return (
+    <Suspense fallback=''>
+      <Page>Static Pages</Page>
+    </Suspense>
+  );
 });
 
+// Route Pages：用網址切換，新增頁面時在這裡加 <Route>
 const RoutePages = memo(() => (
   <Routes>
     <Route path='/' element={<Home>Route Pages</Home>} />
@@ -58,16 +61,14 @@ const App = () => {
   return (
     <div className='App'>
       <Context.Provider {...{ value }}>
-        {/* 2 選 1：Route Pages 或 Static Pages */}
-
-        {/* 1. Route Pages */}
-        <BrowserRouter basename=''>
-          <RoutePages />
-        </BrowserRouter>
-
-        {/* 2. Static Pages */}
-        <Pages />
-
+        {/* 2 選 1：由 src/settings/config.ts 的 PAGE_MODE 決定 */}
+        {PAGE_MODE === 'route' ? (
+          <BrowserRouter basename=''>
+            <RoutePages />
+          </BrowserRouter>
+        ) : (
+          <StaticPages />
+        )}
         {state[ActionType.LoadingProcess]?.enabled && <LoadingProcess />}
       </Context.Provider>
     </div>

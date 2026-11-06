@@ -31,7 +31,7 @@ export enum TransitionType {
 export type TLoadingProcessState = {
   enabled?: boolean;
   type?: LoadingProcessType;
-  body?: '';
+  body?: ReactNode;
 };
 
 export type TSoundsState = {

@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "rm": "rm -rf node_modules/ dist/ package-lock.json",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
     "deploy": "node ./scripts/deploy.js",
     "cdn:upload": "node ./scripts/cdn-upload.js",
     "cdn:purge": "node ./scripts/cdn-purge.js"

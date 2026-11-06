@@ -5,11 +5,11 @@ import { twMerge } from 'tailwind-merge';
 import './index.less';
 
 const Background = () => (
-  <div className='bg-backgroundColor absolute top-0 h-full w-full opacity-90' />
+  <div className='bg-base-100 absolute top-0 h-full w-full opacity-90' />
 );
 
 const Text = ({ children }: IReactProps) => (
-  <span className='text-textColor relative'>{children}</span>
+  <span className='text-base-content relative'>{children}</span>
 );
 
 const LoadingSvg = ({ className, type }: { className: string; type?: string }) => {

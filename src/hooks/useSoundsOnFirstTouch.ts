@@ -9,7 +9,7 @@ const FIRST_TOUCH_EVENTS = ['pointerdown', 'keydown'] as const;
 /**
  * 使用者第一次點擊畫面時建立 Sounds 並讀取全部音檔，再存進 Context 的 sounds。
  * 瀏覽器規定要有使用者手勢才能播放聲音，所以不在頁面載入時就建立。
- * 元件內取用：const [context] = useContext(Context); context[ActionType.Sounds]?.instance?.play('click');
+ * 元件內取用：const [context] = useContext(Context); context[ActionType.Sounds]?.track?.play('click');
  */
 const useSoundsOnFirstTouch = (dispatch: Dispatch<IAction>) => {
   useEffect(() => {
@@ -24,7 +24,7 @@ const useSoundsOnFirstTouch = (dispatch: Dispatch<IAction>) => {
         onLoad: () => dispatch({ type: ActionType.Sounds, state: { loaded: true } }),
         onError: (message) => console.warn(`[Sounds] ${message}`),
       });
-      // 同步寫入 Context，確保同一次點擊的 click handler 已拿得到 instance（載入完成後會自動補播）
+      // 同步寫入 Context，確保同一次點擊的 click handler 已拿得到 track（載入完成後會自動補播）
       flushSync(() => dispatch({ type: ActionType.Sounds, state: { track: sounds } }));
     }
 
