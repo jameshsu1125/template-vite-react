@@ -2,6 +2,7 @@ import Button from '@/components/button';
 import useTodos from '@/hooks/useTodos';
 import { IReactProps } from '@/settings/type';
 import { memo, useState } from 'react';
+import { TbCloudDownload } from 'react-icons/tb';
 import { HomeContext, HomeState, THomeState } from './config';
 import './index.less';
 
@@ -19,25 +20,28 @@ const Home = memo(({ children }: IReactProps) => {
               onClick={() => {
                 getTodos();
               }}
+              disabled={(todos?.length ?? 0) > 0}
             >
-              <Button.Primary>fetch todos</Button.Primary>
+              <Button.Primary>
+                fetch todos <TbCloudDownload />
+              </Button.Primary>
             </Button>
             {todos && (
-              <div className='overflow-hidden rounded-2xl border border-neutral bg-base-100 shadow-lg shadow-black/30'>
+              <div className='border-neutral bg-base-100 overflow-hidden rounded-2xl border shadow-lg shadow-black/30'>
                 <div className='overflow-x-auto'>
                   <table className='w-full border-collapse text-left text-sm'>
-                    <thead className='bg-primary text-primary-content'>
+                    <thead className='bg-secondary text-secondary-content'>
                       <tr>
                         <th className='px-6 py-4 font-semibold'>ID</th>
                         <th className='px-6 py-4 font-semibold'>Title</th>
                         <th className='px-6 py-4 text-center font-semibold'>Status</th>
                       </tr>
                     </thead>
-                    <tbody className='divide-y divide-neutral'>
+                    <tbody className='divide-neutral divide-y'>
                       {todos.map((todo) => (
-                        <tr key={todo.id} className='transition-colors hover:bg-secondary/15'>
-                          <td className='px-6 py-4 font-medium text-neutral-content'>#{todo.id}</td>
-                          <td className='px-6 py-4 font-medium text-base-content'>{todo.title}</td>
+                        <tr key={todo.id} className='hover:bg-secondary/15 transition-colors'>
+                          <td className='text-neutral-content px-6 py-4 font-medium'>#{todo.id}</td>
+                          <td className='text-base-content px-6 py-4 font-medium'>{todo.title}</td>
                           <td className='px-6 py-4 text-center'>
                             <span
                               className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${

@@ -2,12 +2,24 @@
 
 button {
   .Primary {
-    @apply bg-primary text-primary-content border-primary-content rounded-xl border px-5 py-2 duration-150;
+    @apply bg-primary text-primary-content border-primary-content flex flex-row items-center justify-center gap-2 rounded-xl border px-5 py-2 duration-150;
   }
 
   &:hover {
     .Primary {
       @apply bg-primary/75;
+    }
+  }
+
+  &:disabled {
+    .Primary {
+      @apply bg-neutral text-neutral-content/50 border-primary-content/50 cursor-not-allowed;
+    }
+  }
+
+  &:active {
+    .Primary {
+      @apply bg-primary-content text-primary;
     }
   }
 }
