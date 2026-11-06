@@ -58,10 +58,16 @@ const App = () => {
   return (
     <div className='App'>
       <Context.Provider {...{ value }}>
+        {/* 2 選 1：Route Pages 或 Static Pages */}
+
+        {/* 1. Route Pages */}
         <BrowserRouter basename=''>
           <RoutePages />
         </BrowserRouter>
+
+        {/* 2. Static Pages */}
         <Pages />
+
         {state[ActionType.LoadingProcess]?.enabled && <LoadingProcess />}
       </Context.Provider>
     </div>
