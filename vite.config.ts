@@ -37,7 +37,10 @@ export default defineConfig(async ({ mode }) => {
     },
     css: {
       postcss: {
-        plugins: [tailwindcss(), postcssCdnUrl({ enabled: useCdn, cdnUrl, folder: cdnFolder, alias })],
+        plugins: [
+          tailwindcss(),
+          postcssCdnUrl({ enabled: useCdn, cdnUrl, folder: cdnFolder, alias }),
+        ],
       },
       preprocessorOptions: {
         less: {
@@ -57,6 +60,8 @@ export default defineConfig(async ({ mode }) => {
             description: env.VITE_SUBSCRIPTION,
             url: env.VITE_URL,
             facebookID: env.VITE_FACEBOOK_ID,
+            googleAnalyticsID: env.VITE_GOOGLE_ANALYTICS_ID,
+            facebookAnalyticsID: env.VITE_FACEBOOK_ANALYTICS_ID,
             imageBase: useCdn ? `${cdnUrl}/${cdnFolder}/` : '',
           },
         },
