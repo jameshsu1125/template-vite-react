@@ -4,7 +4,8 @@ import { REST_PATH } from '../settings/config';
 import { Context } from '../settings/constant';
 import { ActionType } from '@/settings/type';
 
-export type TResult = { userID: string; id: number; title: string; completed: boolean } | undefined;
+export type TResult =
+  { userID: string; id: number; title: string; completed: boolean }[] | undefined;
 
 const useTodos = () => {
   const [, setContext] = useContext(Context);

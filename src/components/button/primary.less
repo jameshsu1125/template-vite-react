@@ -2,6 +2,12 @@
 
 button {
   .Primary {
-    @apply bg-primary text-primary-content border-base-300 rounded-xl border px-5 py-2;
+    @apply bg-primary text-primary-content border-primary-content rounded-xl border px-5 py-2 duration-150;
+  }
+
+  &:hover {
+    .Primary {
+      @apply bg-primary/75;
+    }
   }
 }
