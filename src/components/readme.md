@@ -13,6 +13,7 @@
   - [LoadingProcess](#loadingprocess)
     - [Usage](#usage-1)
     - [State](#state)
+  - [Modal](#modal)
   - [Sounds](#sounds)
   - [新增元件](#新增元件)
 
@@ -102,6 +103,55 @@ const Page = () => {
 `LoadingProcessType`：`Ball`(`balls`)、`Bars`、`Bubbles`、`Cubes`、`Cylon`、`Spin`、`SpinningBubbles`(`spinningBubbles`)、`Spokes`。
 
 新增圖示：把 svg 放進 `loadingProcess/svg/` → 在 `index.less` 加同名 class 的 `mask-image` → `LoadingProcessType` 加成員。
+
+## Modal
+
+全螢幕置中的對話框（Title、Body、底部按鈕、右上角 ✕）。**不需要自己 import 渲染**：`App` 在 `context.modal.enabled` 為 `true` 時自動掛載，元件沒有 props，全由 Context 設定。規格沿用 template-netlify-mern。
+
+### Usage
+
+```tsx
+import { Context } from '@/settings/constant';
+import { ActionType } from '@/settings/type';
+import { useContext } from 'react';
+
+const [, setContext] = useContext(Context);
+
+setContext({
+  type: ActionType.Modal,
+  state: {
+    enabled: true,
+    title: '刪除確認',
+    body: '確定要刪除嗎？',
+    label: ['取消', '刪除'],
+    onClose: async (label) => {
+      if (label === '刪除') await doDelete();
+      // 回傳 false 則不關閉
+    },
+  },
+});
+```
+
+### 行為
+
+| 操作              | 結果                                                          |
+| :---------------- | :------------------------------------------------------------ |
+| 按下底部按鈕      | 先呼叫 `onClose(按鈕文字)`（可 async），沒回傳 `false` 就關閉 |
+| 點 ✕、點背景、Esc | 只關閉，**不會**呼叫 `onClose`                                |
+
+關閉時整包 state 還原成初始值（`label` 回到 `'close'`、事件清掉），下次開啟不會殘留上一次的設定。最後一顆按鈕為主色。視窗 `fixed` 置中、`z-40`。
+
+### State
+
+`context.modal`
+
+| Properties                                           |                   description                    |   default |
+| :--------------------------------------------------- | :----------------------------------------------: | --------: |
+| **enabled**:_boolean_                                |                  是否掛載到 DOM                  |     false |
+| **title**:_ReactNode_                                |                       標題                       |        '' |
+| **body**:_ReactNode_                                 |                       內容                       |        '' |
+| **label**:_string \| string[]_                       | 底部按鈕文字，字串一顆、陣列多顆（文字不可重複） |   'close' |
+| **onClose**:_(label?) => void \| boolean \| Promise_ |     按下底部按鈕時呼叫，回傳 `false` 不關閉      | undefined |
 
 ## Sounds
 

@@ -5,6 +5,7 @@ export enum ActionType {
   Page = 'page',
   LoadingProcess = 'loadingProcess',
   Sounds = 'sounds',
+  Modal = 'modal',
 }
 
 export enum LoadingProcessType {
@@ -41,14 +42,25 @@ export type TSoundsState = {
   loaded?: boolean;
 };
 
+export type TModalState = {
+  enabled?: boolean;
+  title?: ReactNode;
+  body?: ReactNode;
+  // 底部按鈕文字：字串顯示一顆、陣列顯示多顆（文字不可重複）
+  label?: string | string[];
+  // 按下底部按鈕時呼叫，參數是該按鈕文字；可為 async，回傳 false 則不關閉
+  onClose?: (label?: string) => void | boolean | Promise<void | boolean>;
+};
+
 export interface IState {
   page?: string;
   loadingProcess?: TLoadingProcessState;
   sounds?: TSoundsState;
+  modal?: TModalState;
 }
 
 export interface IAction {
-  state: IState | TLoadingProcessState | TSoundsState;
+  state: IState | TLoadingProcessState | TSoundsState | TModalState;
   type: ActionType;
 }
 

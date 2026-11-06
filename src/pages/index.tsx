@@ -1,4 +1,5 @@
 import LoadingProcess from '@/components/loadingProcess';
+import Modal from '@/components/modal';
 import useSoundsOnFirstTouch from '@/hooks/useSoundsOnFirstTouch';
 import { PAGE, PAGE_MODE } from '@/settings/config';
 import { Context, InitialState, Reducer } from '@/settings/constant';
@@ -70,6 +71,7 @@ const App = () => {
           <StaticPages />
         )}
         {state[ActionType.LoadingProcess]?.enabled && <LoadingProcess />}
+        {state[ActionType.Modal]?.enabled && <Modal />}
       </Context.Provider>
     </div>
   );

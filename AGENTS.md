@@ -191,15 +191,17 @@ enum ActionType {
   Page = 'page',
   LoadingProcess = 'loadingProcess',
   Sounds = 'sounds',
+  Modal = 'modal',
 }
 
 interface IState {
   page?: string; // 目前靜態頁面（PAGE 的值）
   loadingProcess?: TLoadingProcessState;
   sounds?: TSoundsState;
+  modal?: TModalState;
 }
 interface IAction {
-  state: IState | TLoadingProcessState | TSoundsState;
+  state: IState | TLoadingProcessState | TSoundsState | TModalState;
   type: ActionType;
 }
 type TContext = [IState, Dispatch<IAction>];
@@ -210,6 +212,7 @@ type TContext = [IState, Dispatch<IAction>];
 | `page`           | `string`                                                             | `PAGE.home`（`'home'`）                      |
 | `loadingProcess` | `{ enabled?: boolean; type?: LoadingProcessType; body?: ReactNode }` | `{ enabled: false, type: Spokes, body: '' }` |
 | `sounds`         | `{ track?: Sounds \| null; loaded?: boolean }`                       | `{ track: null, loaded: false }`             |
+| `modal`          | `TModalState`（見 8.4）                                              | `ModalState`（`enabled: false`）             |
 
 ### 6.2 使用
 
@@ -384,6 +387,27 @@ export const SoundList = {
 | `destroy()`                                   | 卸載全部音軌、移除監聽（由 hook 在 unmount 時呼叫）                                  |
 
 新增音效：mp3 放 `src/components/sounds/mp3/` → `config.ts` import 並加進 `SoundList` → 完成（型別自動帶出）。不要修改 `type.ts`。
+
+### 8.4 `Modal`（`@/components/modal`）
+
+全螢幕對話框，`memo`，**無 props**，資料全部來自 `context.modal`。由 `App` 在 `enabled === true` 時掛載，頁面中不要自行 import 渲染。內含 Title、Body、Cancel（`Button`）與 Confirm（`Button` + `Button.Primary`）。
+
+`TModalState`（規格沿用 template-netlify-mern）：`enabled`、`title`、`body`、`label`（`string | string[]`，預設 `'close'`）、`onClose(label)`。
+
+```tsx
+setContext({
+  type: ActionType.Modal,
+  state: {
+    enabled: true,
+    title: '刪除',
+    body: '確定？',
+    label: ['取消', '刪除'],
+    onClose: (l) => l === '刪除' && doDelete(),
+  },
+});
+```
+
+行為：按底部按鈕 → `await onClose(label)` → 結果不是 `false` 就關閉並把 state 還原成 `ModalState`（`enabled: false`）。右上角 ✕、點擊背景、Esc 只關閉，不呼叫 `onClose`。視窗 `fixed` 置中（`z-40`），最後一顆按鈕為主色。
 
 ## 9. Hooks 規格
 
