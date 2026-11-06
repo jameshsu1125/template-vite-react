@@ -195,15 +195,19 @@ enum ActionType {
 }
 
 interface IState {
-  page?: string; // 目前靜態頁面（PAGE 的值）
+  page?: (typeof PAGE)[keyof typeof PAGE]; // 目前靜態頁面（PAGE 的值）
   loadingProcess?: TLoadingProcessState;
   sounds?: TSoundsState;
   modal?: TModalState;
 }
-interface IAction {
-  state: IState | TLoadingProcessState | TSoundsState | TModalState;
-  type: ActionType;
-}
+type TActionStateMap = {
+  [ActionType.Page]: (typeof PAGE)[keyof typeof PAGE];
+  [ActionType.LoadingProcess]: TLoadingProcessState;
+  [ActionType.Sounds]: TSoundsState;
+  [ActionType.Modal]: TModalState;
+};
+// discriminated union：選了 type，state 只會提示該 type 的欄位
+type IAction = { [K in ActionType]: { type: K; state: TActionStateMap[K] } }[ActionType];
 type TContext = [IState, Dispatch<IAction>];
 ```
 
@@ -233,11 +237,11 @@ setContext({
 });
 ```
 
-Reducer 行為（`constant.ts`）：`action.state` 是物件時，把它的欄位合併進 `state[action.type]`；`action.state` 不是物件（例如字串）時，整個取代 `state[action.type]`（切換頁面用 `{ type: ActionType.Page, state: PAGE.home }`，型別上需轉型）。
+Reducer 行為（`constant.ts`）：`action.state` 是物件時，把它的欄位合併進 `state[action.type]`；`action.state` 不是物件（例如字串）時，整個取代 `state[action.type]`（切換頁面用 `{ type: ActionType.Page, state: PAGE.home }`，不需轉型）。`IAction` 是依 `type` 分流的 union，`state` 只接受該 `type` 對應的型別。
 
 ### 6.3 新增一個全域 state
 
-1. `type.ts`：`ActionType` 加成員（值為小寫 camelCase 字串）；新增 `TXxxState`；`IState` 加欄位；`IAction['state']` 的 union 加上 `TXxxState`。
+1. `type.ts`：`ActionType` 加成員（值為小寫 camelCase 字串）；新增 `TXxxState`；`IState` 加欄位；`TActionStateMap` 加 `[ActionType.Xxx]: TXxxState`。
 2. `constant.ts`：建立 `XxxState` 初始值，加進 `InitialState`（key 用 `[ActionType.Xxx]`）。
 3. 使用端用 `Context` 讀寫。
 4. 更新本章 6.1 表格與相關 readme。
@@ -258,7 +262,7 @@ Reducer 行為（`constant.ts`）：`action.state` 是物件時，把它的欄�
 | `<StaticPages />`                       | 依 `context.page` 從 `PAGE` 對應的 `./<page>/index.tsx` 渲染（元件在模組層級用 `import.meta.glob` + `lazy` 建好，不可移進 render）       |
 | `<LoadingProcess />`                    | `context.loadingProcess.enabled` 為 `true` 才掛載                                                                                        |
 
-> 切換方式：改 `PAGE_MODE`。`'static'` 模式用 `setContext({ type: ActionType.Page, state: PAGE.<name> })` 換頁（型別上需轉型）。不用的那一組不必刪，兩者皆保留以便隨時切換；build 可能出現 `INEFFECTIVE_DYNAMIC_IMPORT` 警告（`Home` 同時被靜態與動態引入），可忽略。
+> 切換方式：改 `PAGE_MODE`。`'static'` 模式用 `setContext({ type: ActionType.Page, state: PAGE.<name> })` 換頁。不用的那一組不必刪，兩者皆保留以便隨時切換；build 可能出現 `INEFFECTIVE_DYNAMIC_IMPORT` 警告（`Home` 同時被靜態與動態引入），可忽略。
 
 ### 7.2 新增頁面
 

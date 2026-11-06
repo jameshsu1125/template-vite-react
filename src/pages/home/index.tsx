@@ -1,12 +1,15 @@
 import Button from '@/components/button';
 import useTodos from '@/hooks/useTodos';
-import { IReactProps } from '@/settings/type';
-import { memo, useState } from 'react';
+import { ActionType, IReactProps } from '@/settings/type';
+import { memo, useContext, useState } from 'react';
 import { TbCloudDownload } from 'react-icons/tb';
 import { HomeContext, HomeState, THomeState } from './config';
 import './index.less';
+import { Context } from '@/settings/constant';
 
 const Home = memo(({ children }: IReactProps) => {
+  const [, setContext] = useContext(Context);
+
   const [state, setState] = useState<THomeState>(HomeState);
   const [todos, getTodos] = useTodos();
 
@@ -16,16 +19,34 @@ const Home = memo(({ children }: IReactProps) => {
         <div className='bg-base-300 rounded-2xl drop-shadow-2xl'>
           <div className='flex flex-col gap-5 p-5'>
             <h1 className='text-base-content font-black'>{children}</h1>
-            <Button
-              onClick={() => {
-                getTodos();
-              }}
-              disabled={(todos?.length ?? 0) > 0}
-            >
-              <Button.Primary>
-                fetch todos <TbCloudDownload />
-              </Button.Primary>
-            </Button>
+            <div className='flex w-full flex-row items-center justify-center'>
+              <Button
+                onClick={() => {
+                  getTodos();
+                }}
+                disabled={(todos?.length ?? 0) > 0}
+              >
+                <Button.Primary>
+                  FETCH TODOS <TbCloudDownload />
+                </Button.Primary>
+              </Button>
+              <Button
+                onClick={() => {
+                  setContext({
+                    type: ActionType.Modal,
+                    state: {
+                      enabled: true,
+                    },
+                  });
+                }}
+                disabled={(todos?.length ?? 0) > 0}
+              >
+                <Button.Primary>
+                  OPEN MODAL <TbCloudDownload />
+                </Button.Primary>
+              </Button>
+            </div>
+
             {todos && (
               <div className='border-neutral bg-base-100 overflow-hidden rounded-2xl border shadow-lg shadow-black/30'>
                 <div className='overflow-x-auto'>

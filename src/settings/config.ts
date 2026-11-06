@@ -9,7 +9,7 @@ export const PAGE_MODE: TPageMode = 'static';
 
 export const PAGE = {
   home: 'home',
-};
+} as const;
 
 export const REST_PATH = {
   test: 'todos?_limit=10',

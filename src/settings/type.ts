@@ -1,5 +1,6 @@
 import type Sounds from '@/components/sounds';
 import { Dispatch, ReactNode } from 'react';
+import { PAGE } from './config';
 
 export enum ActionType {
   Page = 'page',
@@ -53,16 +54,24 @@ export type TModalState = {
 };
 
 export interface IState {
-  page?: string;
+  page?: (typeof PAGE)[keyof typeof PAGE];
   loadingProcess?: TLoadingProcessState;
   sounds?: TSoundsState;
   modal?: TModalState;
 }
 
-export interface IAction {
-  state: IState | TLoadingProcessState | TSoundsState | TModalState;
-  type: ActionType;
-}
+// 每個 ActionType 對應的 state 型別；新增 ActionType 時在這裡補一筆
+export type TActionStateMap = {
+  [ActionType.Page]: (typeof PAGE)[keyof typeof PAGE];
+  [ActionType.LoadingProcess]: TLoadingProcessState;
+  [ActionType.Sounds]: TSoundsState;
+  [ActionType.Modal]: TModalState;
+};
+
+// discriminated union：選了 type，state 就只會提示該 type 的欄位
+export type IAction = {
+  [K in ActionType]: { type: K; state: TActionStateMap[K] };
+}[ActionType];
 
 export type TContext = [IState, Dispatch<IAction>];
 

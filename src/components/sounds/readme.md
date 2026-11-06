@@ -142,6 +142,6 @@ sounds.track.checkAudioStatus();
 
 1. `npm i howler` 與 `npm i -D @types/howler`
 2. 複製 `src/components/sounds/` 與 `src/hooks/useSoundsOnFirstTouch.ts`
-3. `src/settings/type.ts`：`ActionType` 加 `Sounds = 'sounds'`，新增 `TSoundsState`，並加進 `IState` 與 `IAction['state']`
+3. `src/settings/type.ts`：`ActionType` 加 `Sounds = 'sounds'`，新增 `TSoundsState`，並加進 `IState` 與 `TActionStateMap`
 4. `src/settings/constant.ts`：`InitialState` 加 `[ActionType.Sounds]: { track: null, loaded: false }`
 5. App 元件內 `useReducer` 之後呼叫 `useSoundsOnFirstTouch(setState)`
