@@ -1,4 +1,5 @@
 import LoadingProcess from '@/components/loadingProcess';
+import useSoundsOnFirstTouch from '@/hooks/useSoundsOnFirstTouch';
 import { PAGE } from '@/settings/config';
 import { Context, InitialState, Reducer } from '@/settings/constant';
 import '@/settings/global.css';
@@ -53,6 +54,7 @@ const RoutePages = memo(() => (
 const App = () => {
   const [state, setState] = useReducer(Reducer, InitialState);
   const value: TContext = useMemo(() => [state, setState], [state]);
+  useSoundsOnFirstTouch(setState);
   return (
     <div className='App'>
       <Context.Provider {...{ value }}>

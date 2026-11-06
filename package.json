@@ -9,10 +9,13 @@
     "preview": "vite preview",
     "rm": "rm -rf node_modules/ dist/ package-lock.json",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "deploy": "node ./scripts/deploy.js"
+    "deploy": "node ./scripts/deploy.js",
+    "cdn:upload": "node ./scripts/cdn-upload.js",
+    "cdn:purge": "node ./scripts/cdn-purge.js"
   },
   "dependencies": {
     "@faker-js/faker": "^10.6.0",
+    "howler": "^2.2.4",
     "lesca-click": "^5.0.1",
     "lesca-fetcher": "^3.0.1",
     "react": "^19.3.1",
@@ -21,6 +24,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
+    "@types/howler": "^2.2.13",
     "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
@@ -37,6 +41,7 @@
     "msw": "3.0.3",
     "postcss": "^8.5.30",
     "prettier-plugin-tailwindcss": "^0.8.1",
+    "ssh2-sftp-client": "^12.1.1",
     "tailwind-merge": "^3.7.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.9.3",

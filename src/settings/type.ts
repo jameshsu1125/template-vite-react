@@ -1,8 +1,10 @@
+import type Sounds from '@/components/sounds';
 import { Dispatch, ReactNode } from 'react';
 
 export enum ActionType {
   Page = 'page',
   LoadingProcess = 'loadingProcess',
+  Sounds = 'sounds',
 }
 
 export enum LoadingProcessType {
@@ -32,13 +34,21 @@ export type TLoadingProcessState = {
   body?: '';
 };
 
+export type TSoundsState = {
+  // 使用者第一次點擊畫面時才建立（瀏覽器要求有手勢才能播放聲音），在那之前是 null
+  instance?: Sounds | null;
+  // 全部音檔讀取完成
+  loaded?: boolean;
+};
+
 export interface IState {
   page?: string;
   loadingProcess?: TLoadingProcessState;
+  sounds?: TSoundsState;
 }
 
 export interface IAction {
-  state: IState | TLoadingProcessState;
+  state: IState | TLoadingProcessState | TSoundsState;
   type: ActionType;
 }
 
