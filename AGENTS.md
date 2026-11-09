@@ -257,7 +257,7 @@ Reducer 行為（`constant.ts`）：`action.state` 是物件時，把它的欄�
 | 區塊                                    | 說明                                                                                                                                     |
 | :-------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
 | `useSoundsOnFirstTouch(setState)`       | 第一次點擊時建立 `Sounds`（見 9.2）                                                                                                      |
-| `PAGE_MODE`（`src/settings/config.ts`） | `'route'`（預設）渲染 `<BrowserRouter><RoutePages /></BrowserRouter>`；`'static'` 渲染 `<StaticPages />`。**二選一，改這個常數即可切換** |
+| `PAGE_MODE`（`src/settings/config.ts`） | `'static'`（預設）渲染 `<StaticPages />`；`'route'` 渲染 `<BrowserRouter><RoutePages /></BrowserRouter>`。**二選一，改這個常數即可切換** |
 | `<RoutePages />`                        | `Routes`，目前 `<Route path='/' element={<Home>Route Pages</Home>} />`；新增頁面在此加 `<Route>`                                         |
 | `<StaticPages />`                       | 依 `context.page` 從 `PAGE` 對應的 `./<page>/index.tsx` 渲染（元件在模組層級用 `import.meta.glob` + `lazy` 建好，不可移進 render）       |
 | `<LoadingProcess />`                    | `context.loadingProcess.enabled` 為 `true` 才掛載                                                                                        |
@@ -572,9 +572,8 @@ export const handlers = [
 
 下列是目前已知、尚未處理的問題。**修改相關檔案時順手修正並更新本節**；沒被要求時不要擅自大改。
 
-1. `Reducer`（`constant.ts`）的過濾 / 合併寫法繞且使用 `any`；除非要重構，不要改動其對外行為（見 6.2）。
-2. `eslint.config.js` 未引入 `@eslint/js` 的 `recommended`（專案未安裝該套件），只套用 typescript-eslint 與 react-hooks 規則。
-3. `useTodos` 的 `Fetcher.get` 失敗時錯誤會往外拋，`Home` 沒有接住，會變成 unhandled rejection。
+1. `eslint.config.js` 未引入 `@eslint/js` 的 `recommended`（專案未安裝該套件），只套用 typescript-eslint 與 react-hooks 規則。
+2. `useTodos` 的 `Fetcher.get` 失敗時錯誤會往外拋，`Home` 沒有接住，會變成 unhandled rejection。
 
 ## 16. 完成前檢查清單
 

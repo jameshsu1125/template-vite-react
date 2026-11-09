@@ -187,7 +187,7 @@ env 目錄是 `src/pages`。只有 `VITE_` 開頭的變數會進前端；`BUNNY_
 
 - `public` folder will copy to `/dist`
 - `src` folder is reactJs entry point. default file is named as `pages/index.tsx`
-- 頁面切換二選一：`src/settings/config.ts` 的 `PAGE_MODE` 設為 `'route'`（網址路由，預設）或 `'static'`（依 Context 的 `page` 切換）
+- 頁面切換二選一：`src/settings/config.ts` 的 `PAGE_MODE` 設為 `'static'`（依 Context 的 `page` 切換，預設）或 `'route'`（網址路由）
 - Vite 的 `root` 是 `src/pages`，建置輸出到專案根目錄的 `/dist`
 
 ## Bugs and feature requests
