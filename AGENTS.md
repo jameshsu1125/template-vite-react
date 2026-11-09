@@ -206,8 +206,10 @@ type TActionStateMap = {
   [ActionType.Sounds]: TSoundsState;
   [ActionType.Modal]: TModalState;
 };
-// discriminated union：選了 type，state 只會提示該 type 的欄位
-type IAction = { [K in ActionType]: { type: K; state: TActionStateMap[K] } }[ActionType];
+// discriminated union：選了 type，state 只會提示該 type 的欄位（可只傳部分欄位）
+type IAction = {
+  [K in ActionType]: { type: K; state: Partial<TActionStateMap[K]> };
+}[ActionType];
 type TContext = [IState, Dispatch<IAction>];
 ```
 

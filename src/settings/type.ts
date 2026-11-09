@@ -68,9 +68,9 @@ export type TActionStateMap = {
   [ActionType.Modal]: TModalState;
 };
 
-// discriminated union：選了 type，state 就只會提示該 type 的欄位
+// discriminated union：選了 type，state 就只會提示該 type 的欄位（可只傳部分欄位）
 export type IAction = {
-  [K in ActionType]: { type: K; state: TActionStateMap[K] };
+  [K in ActionType]: { type: K; state: Partial<TActionStateMap[K]> };
 }[ActionType];
 
 export type TContext = [IState, Dispatch<IAction>];
