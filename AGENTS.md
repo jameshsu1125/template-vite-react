@@ -39,6 +39,7 @@ Vite + React 19 + TypeScript 的前端專案模板（template-vite-react），�
 | 音效    | `howler`                                                                    |
 | API     | `lesca-fetcher`；Mock 用 `msw` 3 + `@faker-js/faker`                        |
 | 點擊    | `lesca-click`（`Click.install()` 於 `src/pages/index.tsx`）                 |
+| 動態    | `lesca-use-tween`（所有 JS 動態的唯一寫法，見 11.1）                        |
 | 部署    | `gh-pages`、Netlify CLI、Bunny CDN（SFTP）                                  |
 
 模組為 ESM（`package.json` 的 `"type": "module"`）。`scripts/` 內的 `.js` 是 Node ESM，用 `import`，不用 `require`。
@@ -293,7 +294,7 @@ export const HomeContext = createContext<THomeContext>([HomeState, () => {}]);
 
 ### 7.4 `Home`（`src/pages/home/index.tsx`）
 
-`memo` 元件，props 為 `IReactProps`；`children` 顯示在 `<h1>`。內含「fetch todos」按鈕（`useTodos`，已取得資料後 `disabled`）與 todos 表格（ID / Title / Status）。是 `Button`、`Button.Primary`、`useTodos`、react-icons 的使用範例。
+`memo` 元件，props 為 `IReactProps`；`children` 顯示在 `<h1>`。內含「fetch todos」按鈕（`useTodos`，已取得資料後 `disabled`）與 todos 表格（ID / Title / Status），以及 `AnimatedDemo`（JS 動態範例，見 11.1）。是 `Button`、`Button.Primary`、`useTodos`、react-icons、`lesca-use-tween` 的使用範例。
 
 ## 8. 元件規格
 
@@ -517,6 +518,58 @@ export const handlers = [
 - 根節點 class 用元件 / 頁面名稱（PascalCase），子樣式巢狀在其下，避免全域污染。
 - Less 設定：`math: 'always'`。斷點變數在 `src/settings/config.less`（`@XS: 430px; @SM: 768px; @MD: 1024px; @LG: 1280px`）。
 - 合併動態 class 用 `twMerge`（`tailwind-merge`）。
+
+### 11.1 JS 動態（`lesca-use-tween`）
+
+> **規則：本專案所有 JS 驅動的動態（進場、位移、淡入、寬度展開等），一律用 `lesca-use-tween` 的 `TweenerDivProvider` 寫，不另外引入或自刻 `requestAnimationFrame`、`setInterval`、其他動畫套件。** 純 CSS 的 hover / transition 仍用 Tailwind。
+
+範例：`src/pages/home/index.tsx` 的 `AnimatedDemo`。
+
+```tsx
+import { Easing, TweenerDivProvider } from 'lesca-use-tween';
+
+const AnimatedDemo = forwardRef((_, ref) => {
+  const [shouldFadeIn, setShouldFadeIn] = useState(false);
+  const [shouldTextFadeIn, setShouldTextFadeIn] = useState(false);
+
+  // 父層用 ref 觸發：ref.current?.animate()
+  useImperativeHandle(ref, () => ({ animate: () => setShouldFadeIn(true) }));
+
+  return (
+    <TweenerDivProvider
+      initialStyle={{ opacity: 0, y: -100 }} // 起始樣式
+      tweenTo={{ opacity: 1, y: 0 }} // 目標樣式
+      shouldFadeIn={shouldFadeIn} // 變 true 時開始動畫
+      options={{
+        duration: 500, // ms
+        easing: Easing.outElastic,
+        onEnd: () => setShouldTextFadeIn(true), // 結束後接下一段
+      }}
+    >
+      <TweenerDivProvider
+        initialStyle={{ width: '0%' }}
+        tweenTo={{ width: '100%' }}
+        className='overflow-x-clip whitespace-nowrap'
+        shouldFadeIn={shouldTextFadeIn}
+        options={{ duration: 800, easing: Easing.inOutQuart }}
+      >
+        Animated Content
+      </TweenerDivProvider>
+    </TweenerDivProvider>
+  );
+});
+```
+
+寫法要點：
+
+| 項目     | 說明                                                                                                        |
+| :------- | :---------------------------------------------------------------------------------------------------------- |
+| 觸發     | 用 `shouldFadeIn`（boolean state）控制，由 `false` → `true` 時播放；不要在 effect 內手動操作 DOM style      |
+| 樣式     | `initialStyle` → `tweenTo`；可用 `opacity`、`x`、`y`、`width` 等，單位字串（如 `'100%'`）直接寫             |
+| 參數     | `options`：`duration`（ms）、`easing`（`Easing.*`）、`onEnd`（結束 callback）                               |
+| 串接     | 前一段的 `onEnd` 設定下一段的 `shouldFadeIn` state，形成序列；巢狀 `TweenerDivProvider` 可做外框 + 內容分段 |
+| 外部觸發 | 動畫元件用 `forwardRef` + `useImperativeHandle` 暴露 `animate()`，父層以 `useRef` 呼叫                      |
+| class    | 可傳 `className`（Tailwind utility）；容器版型 class 照 11 的規則                                           |
 
 ## 12. 靜態資源與 Bunny CDN
 

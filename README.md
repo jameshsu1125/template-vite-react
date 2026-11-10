@@ -181,7 +181,7 @@ env 目錄是 `src/pages`。只有 `VITE_` 開頭的變數會進前端；`BUNNY_
 - use [LessCSS](https://lesscss.org/) and [TailwindCSS](https://tailwindcss.com/) for css library.
 - use [ESLint](https://eslint.org/) rules for coding style.
 - use [Mocks](https://mswjs.io/) and [faker](https://fakerjs.dev/) for testing API
-- use [Howler.js](https://howlerjs.com/) for sounds, [lesca-fetcher](https://www.npmjs.com/package/lesca-fetcher) for API requests
+- use [Howler.js](https://howlerjs.com/) for sounds, [lesca-fetcher](https://www.npmjs.com/package/lesca-fetcher) for API requests; [lesca-use-tween](https://www.npmjs.com/package/lesca-use-tween) for all JS animations (see AGENTS.md 11.1)
 
 ## What's included
 

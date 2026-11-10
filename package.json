@@ -18,6 +18,7 @@
     "howler": "^2.2.4",
     "lesca-click": "^5.0.3",
     "lesca-fetcher": "^3.0.1",
+    "lesca-use-tween": "^5.0.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-icons": "^5.7.0",

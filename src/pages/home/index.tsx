@@ -2,12 +2,72 @@ import Button from '@/components/button';
 import useTodos from '@/hooks/useTodos';
 import { Context } from '@/settings/constant';
 import { ActionType, IReactProps } from '@/settings/type';
-import { memo, useContext, useState } from 'react';
+import { forwardRef, memo, useContext, useImperativeHandle, useRef, useState } from 'react';
+import { MdOutlineSlowMotionVideo } from 'react-icons/md';
 import { TbCloudDownload } from 'react-icons/tb';
 import { HomeContext, HomeState, THomeState } from './config';
 import './index.less';
+import { Easing, TweenerDivProvider } from 'lesca-use-tween';
+import { twMerge } from 'tailwind-merge';
+
+const AnimatedDemo = forwardRef((_, ref) => {
+  const [shouldFadeIn, setShouldFadeIn] = useState(false);
+  const [shouldTextFadeIn, setShouldTextFadeIn] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    animate: () => {
+      setShouldFadeIn(true);
+    },
+  }));
+
+  return (
+    <div className='bg-base-content flex h-80 w-full flex-col items-center justify-center gap-1 rounded-2xl'>
+      <TweenerDivProvider
+        initialStyle={{ opacity: 0, y: -100 }}
+        tweenTo={{ opacity: 1, y: 0 }}
+        shouldFadeIn={shouldFadeIn}
+        options={{
+          duration: 500,
+          onEnd: () => setShouldTextFadeIn(true),
+          easing: Easing.outElastic,
+        }}
+      >
+        <div className='bg-primary text-primary-content px-2 py-1 text-3xl font-black'>
+          <TweenerDivProvider
+            initialStyle={{ width: '0%' }}
+            tweenTo={{ width: '100%' }}
+            className='overflow-x-clip whitespace-nowrap'
+            shouldFadeIn={shouldTextFadeIn}
+            options={{ duration: 800, easing: Easing.inOutQuart }}
+          >
+            Animated Content
+          </TweenerDivProvider>
+        </div>
+        {[
+          '・Lightweight design, easy to carry every day',
+          '・Powerful performance for smooth, effortless tasks',
+          '・Intuitive controls, easy to use from the start',
+          '・Carefully selected materials for quality and durability',
+        ].map((text, index) => (
+          <div key={text} className='text-primary-content/80 px-0 py-1 text-xs font-normal'>
+            <TweenerDivProvider
+              initialStyle={{ width: '0%' }}
+              tweenTo={{ width: '100%' }}
+              className='overflow-x-clip whitespace-nowrap'
+              shouldFadeIn={shouldTextFadeIn}
+              options={{ duration: 800, easing: Easing.inOutQuart, delay: 800 + index * 200 }}
+            >
+              {text}
+            </TweenerDivProvider>
+          </div>
+        ))}
+      </TweenerDivProvider>
+    </div>
+  );
+});
 
 const Home = memo(({ children }: IReactProps) => {
+  const ref = useRef<{ animate: () => void } | null>(null);
   const [, setContext] = useContext(Context);
 
   const [state, setState] = useState<THomeState>(HomeState);
@@ -43,6 +103,15 @@ const Home = memo(({ children }: IReactProps) => {
               >
                 <Button.Primary>
                   OPEN MODAL <TbCloudDownload />
+                </Button.Primary>
+              </Button>
+              <Button
+                onClick={() => {
+                  ref.current?.animate();
+                }}
+              >
+                <Button.Primary>
+                  ANIMATED DEMO <MdOutlineSlowMotionVideo />
                 </Button.Primary>
               </Button>
             </div>
@@ -83,6 +152,7 @@ const Home = memo(({ children }: IReactProps) => {
             )}
           </div>
         </div>
+        <AnimatedDemo ref={ref} />
       </HomeContext.Provider>
     </div>
   );
