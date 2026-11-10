@@ -2,13 +2,12 @@ import Button from '@/components/button';
 import useTodos from '@/hooks/useTodos';
 import { Context } from '@/settings/constant';
 import { ActionType, IReactProps } from '@/settings/type';
+import { Easing, TweenerDivProvider } from 'lesca-use-tween';
 import { forwardRef, memo, useContext, useImperativeHandle, useRef, useState } from 'react';
 import { MdOutlineSlowMotionVideo } from 'react-icons/md';
 import { TbCloudDownload } from 'react-icons/tb';
 import { HomeContext, HomeState, THomeState } from './config';
 import './index.less';
-import { Easing, TweenerDivProvider } from 'lesca-use-tween';
-import { twMerge } from 'tailwind-merge';
 
 const AnimatedDemo = forwardRef((_, ref) => {
   const [shouldFadeIn, setShouldFadeIn] = useState(false);
