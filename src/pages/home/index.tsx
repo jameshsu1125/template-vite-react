@@ -1,11 +1,11 @@
 import Button from '@/components/button';
 import useTodos from '@/hooks/useTodos';
+import { Context } from '@/settings/constant';
 import { ActionType, IReactProps } from '@/settings/type';
 import { memo, useContext, useState } from 'react';
 import { TbCloudDownload } from 'react-icons/tb';
 import { HomeContext, HomeState, THomeState } from './config';
 import './index.less';
-import { Context } from '@/settings/constant';
 
 const Home = memo(({ children }: IReactProps) => {
   const [, setContext] = useContext(Context);

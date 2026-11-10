@@ -14,6 +14,7 @@
     - [Usage](#usage-1)
     - [State](#state)
   - [Modal](#modal)
+  - [Container](#container)
   - [Sounds](#sounds)
   - [新增元件](#新增元件)
 
@@ -152,6 +153,42 @@ setContext({
 | **body**:_ReactNode_                                 |                       內容                       |        '' |
 | **label**:_string \| string[]_                       | 底部按鈕文字，字串一顆、陣列多顆（文字不可重複） |   'close' |
 | **onClose**:_(label?) => void \| boolean \| Promise_ |     按下底部按鈕時呼叫，回傳 `false` 不關閉      | undefined |
+
+## Container
+
+高度等於真實可視高度（`window.innerHeight`）的容器，解決手機瀏覽器 `100vh` 被網址列蓋住的問題。內容水平置中，預設最大寬度 `max-w-xl`（可用 `maxWidth` 調整）。移植自 [react-div-100vh](https://github.com/mvasin/react-div-100vh)（MIT）。
+
+### Usage
+
+```tsx
+import Container from '@/components/container';
+
+<Container>固定一屏，不可捲動</Container>
+
+<Container scroll>內容超出一屏時可垂直捲動</Container>
+
+<Container maxWidth='max-w-3xl'>內容區最大寬度 max-w-3xl</Container>
+```
+
+### Props
+
+繼承 `HTMLAttributes<HTMLDivElement>`（`className`、`id`…皆傳給外層 `div`），支援 `ref`。
+
+| Properties                |                                     description                                      |  default |
+| :------------------------ | :----------------------------------------------------------------------------------: | -------: |
+| **scroll**:_boolean_      |  是否可垂直捲動；`true` 時同時呼叫 `Click.setEnabled(false)`，unmount 時還原為啟用   |    false |
+| **maxWidth**:_TMaxWidth_  | 內容區最大寬度（Tailwind `max-w-*`，例：`max-w-3xl`、`max-w-none`、`max-w-[500px]`） | max-w-xl |
+| **style**:_CSSProperties_ |   合併到外層 `div`；`height`、`overflowX`、`overflowY` 會被覆寫（DEV 會警告一次）    |        - |
+
+> `lesca-click` 會攔截瀏覽器預設行為（用於不捲動的頁面），所以 `scroll` 模式要關掉它才能用手指捲動。同一畫面請只放一個 Container。
+
+### use100vh
+
+```ts
+import use100vh from '@/components/container/use100vh';
+
+const height = use100vh(); // number（px），window resize 時更新
+```
 
 ## Sounds
 

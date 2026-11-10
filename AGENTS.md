@@ -129,6 +129,7 @@ Vite + React 19 + TypeScript 的前端專案模板（template-vite-react），�
 ├── src/
 │   ├── components/               # 可重用元件（見 8）
 │   │   ├── button/               # Button、Button.Primary
+│   │   ├── container/            # Container、use100vh（真實可視高度容器）
 │   │   ├── loadingProcess/       # 全螢幕讀取畫面（含 svg/）
 │   │   ├── sounds/               # Howler 封裝（含 mp3/、readme.md）
 │   │   └── readme.md
@@ -414,6 +415,15 @@ setContext({
 ```
 
 行為：按底部按鈕 → `await onClose(label)` → 結果不是 `false` 就關閉並把 state 還原成 `ModalState`（`enabled: false`）。右上角 ✕、點擊背景、Esc 只關閉，不呼叫 `onClose`。視窗 `fixed` 置中（`z-40`），最後一顆按鈕為主色。
+
+### 8.5 `Container`（`@/components/container`）
+
+高度等於 `window.innerHeight` 的容器（修正手機 `100vh` 被網址列蓋住），移植自 react-div-100vh。`forwardRef`，props 為 `HTMLAttributes<HTMLDivElement> & { scroll?: boolean; maxWidth?: TMaxWidth }`。
+
+- 外層 `div`：`height` 固定為 `use100vh()` 的值、`overflowX: hidden`、`overflowY` 依 `scroll`（`true` → `auto`，否則 `hidden`）。`style.height` 會被覆寫（DEV 警告一次）。
+- 內層：`flex min-h-full w-full justify-center` + `relative w-full max-w-xl` 包住 `children`（內容置中、預設最大寬度 576px）；內層 class 以 `twMerge('relative w-full max-w-xl', maxWidth)` 合併，可覆蓋寬度。
+- `scroll` 變化時呼叫 `Click.setEnabled(!scroll)`（`lesca-click` 會攔截預設行為而擋住捲動），unmount 時還原為 `true`。
+- `use100vh()`（`container/use100vh.ts`）：回傳 `number`，監聽 `window.resize`。專案是純 client 的 Vite SPA，不處理 SSR。
 
 ## 9. Hooks 規格
 
